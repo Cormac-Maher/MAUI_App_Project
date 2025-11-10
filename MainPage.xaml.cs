@@ -3,6 +3,7 @@
     public partial class MainPage : ContentPage
     {
         int count = 0;
+        int i = 0;
 
         public MainPage()
         {
