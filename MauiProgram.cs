@@ -1,13 +1,15 @@
 ﻿using Microsoft.Extensions.Logging;
-git clone https://github.com/Cormac-Maher/MAUI_App_Project.git
+//git clone https://github.com/Cormac-Maher/MAUI_App_Project.git
 
 namespace MovieExplorer
 {
     public static class MauiProgram
     {
+        
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
+            float two;
             builder
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
