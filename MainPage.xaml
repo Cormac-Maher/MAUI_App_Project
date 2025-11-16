@@ -8,8 +8,14 @@
             Padding="30,0"
             Spacing="25">
 
-            <Entry Text="{Binding MyName}"/>
-            <Button Text="Submit" x:Name="SubmitBtn1" Clicked="EnterName_Clicked"/>
+            <Label 
+               x:Name="GreetingLabel"
+               FontSize="22"
+               TextColor="White"
+               HorizontalOptions="Center" />
+
+<!--            <Entry Text="{Binding userName}"/>
+            <Button Text="Submit" x:Name="SubmitBtn1" Clicked="EnterName_Clicked"/> -->
 
             <Grid x:Name="GridPageContent" BackgroundColor="CornflowerBlue"
              HeightRequest="300" WidthRequest="300"
@@ -17,11 +23,6 @@
              VerticalOptions="Center">
             </Grid>
 
-            <Button
-                x:Name="Btn"
-                Text="Start Game" 
-                Clicked="OnBtnClicked"
-                HorizontalOptions="Fill" />
         </VerticalStackLayout>
     </ScrollView>
 

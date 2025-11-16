@@ -7,22 +7,29 @@ namespace MovieExplorer
     public partial class MainPage : ContentPage
     {
         int i = 0;
+        string userName;
         public MainPage()
         {
             InitializeComponent();
+
+            userName = Preferences.Get("UserName", string.Empty);
+
+            if (!string.IsNullOrEmpty(userName))
+            {
+                GreetingLabel.Text = $"Hello, {userName}! Welcome back";
+            }
+            else
+            {
+                GreetingLabel.Text = "Hello! Please enter your name.";
+            }
+            CreateTheGrid(); 
         }
   
-        private void EnterName_Clicked(object? sender, EventArgs e)
+/*        private void EnterName_Clicked(object? sender, EventArgs e)
         {            
             SubmitBtn1.SetValue(Button.IsEnabledProperty, false);
-            OnStart();
+        }  */
 
-        }
-
-        private void OnStart()
-        {
-            CreateTheGrid();
-        }
         private void CreateTheGrid()
         {
             for (int i = 0; i < 3; i++)
@@ -50,8 +57,5 @@ namespace MovieExplorer
                 Console.WriteLine();
             }
         }
-
-
-
     }
 }

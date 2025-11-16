@@ -5,11 +5,17 @@
         public App()
         {
             InitializeComponent();
-        }
 
-        protected override Window CreateWindow(IActivationState? activationState)
-        {
-            return new Window(new AppShell());
+            string userName = Preferences.Get("UserName", string.Empty);
+
+            if (string.IsNullOrEmpty(userName))
+            {
+                MainPage = new NavigationPage(new NamePage());
+            }
+            else
+            {
+                MainPage = new NavigationPage(new MainPage());
+            }
         }
     }
 }
