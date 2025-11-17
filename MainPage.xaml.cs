@@ -6,12 +6,13 @@ namespace MovieExplorer
 {
     public partial class MainPage : ContentPage
     {
-        int i = 0;
+        string fileName = "moviesemoji.json";
+        string fileUrl = "https://raw.githubusercontent.com/DonH-ITS/jsonfiles/refs/heads/main/moviesemoji.json";
         string userName;
         public MainPage()
         {
             InitializeComponent();
-
+            LoadJsonAsync();
             userName = Preferences.Get("UserName", string.Empty);
 
             if (!string.IsNullOrEmpty(userName))
@@ -55,6 +56,26 @@ namespace MovieExplorer
                     styledBorder.GestureRecognizers.Add(tapGestureRecognizer);
                 }
                 Console.WriteLine();
+            }
+        }
+        private async void LoadJsonAsync()
+        {
+            string path = Path.Combine(FileSystem.AppDataDirectory, fileName);
+            string jsonContent;
+
+            if (File.Exists(path))
+            {
+                using var reader = new StreamReader(path);
+                jsonContent = await File.ReadAllTextAsync(path);
+            }
+            else
+            {
+                using var httpClient = new HttpClient();
+                using var stream = await httpClient.GetStreamAsync(fileUrl);
+                using var reader = new StreamReader(stream);
+                jsonContent = await reader.ReadToEndAsync();
+                using var writer = new StreamWriter(path, false);
+                await writer.WriteAsync(jsonContent);
             }
         }
     }
