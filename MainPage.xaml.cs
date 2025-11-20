@@ -1,4 +1,5 @@
 ﻿using Microsoft.Maui.Controls;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
 
@@ -6,8 +7,7 @@ namespace MovieExplorer
 {
     public partial class MainPage : ContentPage
     {
-        string fileName = "moviesemoji.json";
-        string fileUrl = "https://raw.githubusercontent.com/DonH-ITS/jsonfiles/refs/heads/main/moviesemoji.json";
+        private HttpClient _httpClient;
         string userName;
         public MainPage()
         {
@@ -58,24 +58,40 @@ namespace MovieExplorer
                 Console.WriteLine();
             }
         }
+
+        string fileName = "moviesemoji.json";
+        string fileUrl = "https://raw.githubusercontent.com/DonH-ITS/jsonfiles/refs/heads/main/moviesemoji.json";
         private async void LoadJsonAsync()
         {
             string path = Path.Combine(FileSystem.AppDataDirectory, fileName);
             string jsonContent;
-
+            _httpClient = new HttpClient();
             if (File.Exists(path))
             {
-                using var reader = new StreamReader(path);
+   //             using var reader = new StreamReader(path);
                 jsonContent = await File.ReadAllTextAsync(path);
+                Console.WriteLine("Already dowloaded code!");
             }
             else
             {
-                using var httpClient = new HttpClient();
-                using var stream = await httpClient.GetStreamAsync(fileUrl);
-                using var reader = new StreamReader(stream);
-                jsonContent = await reader.ReadToEndAsync();
-                using var writer = new StreamWriter(path, false);
-                await writer.WriteAsync(jsonContent);
+                try {
+                    var response = await _httpClient.GetAsync(fileUrl);
+                    if (response != null && response.IsSuccessStatusCode)
+                    {
+                        jsonContent = await response.Content.ReadAsStringAsync();
+                    }
+                }
+                catch(Exception ex) {
+                    Console.WriteLine($"Error: {ex.Message}");
+                    return;
+                }
+
+//                using var httpClient = new HttpClient();
+//                using var stream = await httpClient.GetStreamAsync(fileUrl);
+//                using var reader = new StreamReader(stream);
+//                jsonContent = await reader.ReadToEndAsync();
+//                using var writer = new StreamWriter(path, false);
+//               await writer.WriteAsync(jsonContent);
             }
         }
     }
