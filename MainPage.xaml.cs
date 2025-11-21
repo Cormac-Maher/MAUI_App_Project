@@ -17,7 +17,7 @@ namespace MovieExplorer
 
             if (!string.IsNullOrEmpty(userName))
             {
-                GreetingLabel.Text = $"Hello, {userName}! Welcome back";
+                GreetingLabel.Text = $"Hello, {userName}! Welcome back to Movie Explorer";
             }
             else
             {
@@ -41,13 +41,27 @@ namespace MovieExplorer
             }
             for (int i = 0; i < 3; i++)
             {
-                for (int j = 0; j < 3; j++)
+                for (int j = 0; j < 6; j++)
                 {
+                    VerticalStackLayout info = new VerticalStackLayout
+                    {
+                        HorizontalOptions = LayoutOptions.Start,
+                        VerticalOptions = LayoutOptions.Start,
+                        Spacing = 2
+                    };
+
+                    info.Children.Add(new Label { Text = "Long Long Title", TextColor = Colors.Black, FontAttributes = FontAttributes.Bold, FontSize = 38 });
+                    info.Children.Add(new Label { Text = "Year", TextColor = Colors.Black, FontSize = 18 });
+                    info.Children.Add(new Label { Text = "Genre", TextColor = Colors.Black, FontSize = 18 });
+                    info.Children.Add(new Label { Text = "Director", TextColor = Colors.Black, FontSize = 18 });
+                    info.Children.Add(new Label { Text = "Rating", TextColor = Colors.Black, FontSize = 18 });
+                    info.Children.Add(new Label { Text = "Emoji", TextColor = Colors.Black, FontSize = 18 });
                     Border styledBorder = new Border
                     {
                         BackgroundColor = Colors.Red,
                         Stroke = Colors.Black,
-                        StrokeThickness = 3
+                        StrokeThickness = 3,
+                        Content = info
                     };
                     GridPageContent.Add(styledBorder, i, j);
 
@@ -79,6 +93,8 @@ namespace MovieExplorer
                     if (response != null && response.IsSuccessStatusCode)
                     {
                         jsonContent = await response.Content.ReadAsStringAsync();
+
+                        await File.WriteAllTextAsync(path, jsonContent);
                     }
                 }
                 catch(Exception ex) {
