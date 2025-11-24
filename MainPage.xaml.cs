@@ -1,7 +1,4 @@
 ﻿using Microsoft.Maui.Controls;
-using System;
-using System.Net.Http;
-using System.Net.Http.Json;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
@@ -10,15 +7,12 @@ namespace MovieExplorer
 {
     public partial class MainPage : ContentPage
     {
-
-  //    private List<Movies> _movies = new();
+        private HttpClient _httpClient;
         string userName;
         public MainPage()
         {
-
             InitializeComponent();
             LoadJsonAsync();
-            LoadMovies();
             userName = Preferences.Get("UserName", string.Empty);
 
             if (!string.IsNullOrEmpty(userName))
@@ -29,52 +23,39 @@ namespace MovieExplorer
             {
                 GreetingLabel.Text = "Hello! Please enter your name.";
             }
+            CreateTheGrid(); 
         }
-
   
+/*        private void EnterName_Clicked(object? sender, EventArgs e)
+        {            
+            SubmitBtn1.SetValue(Button.IsEnabledProperty, false);
+        }  */
 
-
-
-
-        private void CreateTheGrid(List<Movies> movies)  
+        private void CreateTheGrid()
         {
-            GridPageContent.RowDefinitions.Clear();    
-            GridPageContent.ColumnDefinitions.Clear(); 
-            GridPageContent.Children.Clear();          
-
-            int columns = 3;
-            int rows = (int)Math.Ceiling((double)movies.Count / columns);
-
-            for (int r = 0; r < rows; r++)
+            for (int i = 0; i < 3; i++)
+            {
                 GridPageContent.AddRowDefinition(new RowDefinition());
-
-            for (int c = 0; c < columns; c++)
                 GridPageContent.AddColumnDefinition(new ColumnDefinition());
 
-            int index = 0;
-
-            for (int r = 0; r < rows; r++)
+            }
+            for (int i = 0; i < 3; i++)
             {
-                for (int c = 0; c < columns; c++)
+                for (int j = 0; j < 6; j++)
                 {
-                    if (index >= movies.Count) break;
-
-                    var movie = movies[index];  
-
-                 
-                    VerticalStackLayout info = new()
+                    VerticalStackLayout info = new VerticalStackLayout
                     {
-                        Spacing = 2,
-                        BindingContext = movie 
+                        HorizontalOptions = LayoutOptions.Start,
+                        VerticalOptions = LayoutOptions.Start,
+                        Spacing = 2
                     };
 
-                    info.Children.Add(CreateBoundLabel("title", 38, true));
-                    info.Children.Add(CreateBoundLabel("year"));
-                    info.Children.Add(CreateBoundLabel("genre"));
-                    info.Children.Add(CreateBoundLabel("director"));
-                    info.Children.Add(CreateBoundLabel("rating"));
-                    info.Children.Add(CreateBoundLabel("emoji"));
-
+                    info.Children.Add(new Label { Text = "Long Long Title", TextColor = Colors.Black, FontAttributes = FontAttributes.Bold, FontSize = 38 });
+                    info.Children.Add(new Label { Text = "Year", TextColor = Colors.Black, FontSize = 18 });
+                    info.Children.Add(new Label { Text = "Genre", TextColor = Colors.Black, FontSize = 18 });
+                    info.Children.Add(new Label { Text = "Director", TextColor = Colors.Black, FontSize = 18 });
+                    info.Children.Add(new Label { Text = "Rating", TextColor = Colors.Black, FontSize = 18 });
+                    info.Children.Add(new Label { Text = "Emoji", TextColor = Colors.Black, FontSize = 18 });
                     Border styledBorder = new Border
                     {
                         BackgroundColor = Colors.Red,
@@ -82,37 +63,18 @@ namespace MovieExplorer
                         StrokeThickness = 3,
                         Content = info
                     };
+                    GridPageContent.Add(styledBorder, i, j);
 
-                    GridPageContent.Add(styledBorder, c, r);
-                    index++;
+                    TapGestureRecognizer tapGestureRecognizer = new TapGestureRecognizer();
+  
+                    styledBorder.GestureRecognizers.Add(tapGestureRecognizer);
                 }
+                Console.WriteLine();
             }
         }
-        private Label CreateBoundLabel(string property, int fontSize = 18, bool bold = false)
-        {
-            var label = new Label
-            {
-                FontSize = fontSize,
-                TextColor = Colors.Black,
-            };
-            label.SetBinding(Label.TextProperty, property);
-            return label;
-        }
-
-
-
-        private HttpClient _httpClient = new HttpClient();
 
         string fileName = "moviesemoji.json";
         string fileUrl = "https://raw.githubusercontent.com/DonH-ITS/jsonfiles/refs/heads/main/moviesemoji.json";
-
-        private readonly MovieService _movieService = new MovieService();
-        private async void LoadMovies()
-        {
-            MoviesCollectionView.ItemsSource = await _movieService.GetMoviesAsync();
-        }
-
-
         private async void LoadJsonAsync()
         {
             string path = Path.Combine(FileSystem.AppDataDirectory, fileName);
@@ -120,11 +82,9 @@ namespace MovieExplorer
             _httpClient = new HttpClient();
             if (File.Exists(path))
             {
+   //             using var reader = new StreamReader(path);
                 jsonContent = await File.ReadAllTextAsync(path);
                 Console.WriteLine("Already dowloaded code!");
-                var movies = JsonSerializer.Deserialize<List<Movies>>(jsonContent);
-   //             GridView.ItemsSource = movies;
-                CreateTheGrid(movies);
             }
             else
             {
@@ -135,25 +95,20 @@ namespace MovieExplorer
                         jsonContent = await response.Content.ReadAsStringAsync();
 
                         await File.WriteAllTextAsync(path, jsonContent);
-                        var movies = JsonSerializer.Deserialize<List<Movies>>(jsonContent);
-                        Console.WriteLine($"Movies loaded: {movies?.Count}");
-                        //                    GridView.ItemsSource = movies;
-                        CreateTheGrid(movies);
                     }
                 }
                 catch(Exception ex) {
                     Console.WriteLine($"Error: {ex.Message}");
                     return;
                 }
+
+//                using var httpClient = new HttpClient();
+//                using var stream = await httpClient.GetStreamAsync(fileUrl);
+//                using var reader = new StreamReader(stream);
+//                jsonContent = await reader.ReadToEndAsync();
+//                using var writer = new StreamWriter(path, false);
+//               await writer.WriteAsync(jsonContent);
             }
-
         }
-
     }
 }
-
-/**      public async Task<List<Movies>> GetMoviesAsync(string fileUrl)
-      {
-          var movies = await _httpClient.GetFromJsonAsync<List<Movies>>(fileUrl);
-          return movies;
-      }**/

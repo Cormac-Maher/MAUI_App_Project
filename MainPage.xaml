@@ -8,31 +8,19 @@
             Padding="30,0"
             Spacing="25">
 
-            <CollectionView x:Name="MoviesCollectionView">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <HorizontalStackLayout Padding="10">
-                            <Label Text="{Binding title}" FontSize="30" TextColor="White"/>
-                            <Label Text="{Binding title}" FontSize="20" VerticalOptions="Center"/>
-                        </HorizontalStackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-
-
             <Label 
-                x:Name="GreetingLabel"
-                FontSize="22"
-                TextColor="White"
-                HorizontalOptions="Center" />
+               x:Name="GreetingLabel"
+               FontSize="22"
+               TextColor="White"
+               HorizontalOptions="Center" />
 
 <!--            <Entry Text="{Binding userName}"/>
             <Button Text="Submit" x:Name="SubmitBtn1" Clicked="EnterName_Clicked"/> -->
-            
+
             <Grid x:Name="GridPageContent" BackgroundColor="CornflowerBlue"
-                HeightRequest="10000" WidthRequest="1500"
-                HorizontalOptions="Center"
-                VerticalOptions="Center">
+             HeightRequest="1500" WidthRequest="1500"
+             HorizontalOptions="Center"
+             VerticalOptions="Center">
             </Grid>
 
         </VerticalStackLayout>

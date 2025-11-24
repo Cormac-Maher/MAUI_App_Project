@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MovieExplorer
 {
-    public class Movies
+    internal class Movies
     {
         public string title { get; set; }
         public int year { get; set; }
