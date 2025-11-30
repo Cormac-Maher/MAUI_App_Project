@@ -4,12 +4,13 @@
              x:Class="MovieExplorer.MovieContentPage"
              Title="MovieContentPage">
     <VerticalStackLayout Padding="20">
-        <Label Text="Title" FontSize="Large" FontAttributes="Bold"/>
-        <Label Text="Year" FontSize="Medium"/>
-        <Label Text="Director" FontSize="Medium"/>
-        <Label Text="Genre" FontSize="Medium"/>
-        <Label Text="Rating" FontSize="Medium"/>
-        <Label Text="Emoji" FontSize="Medium"/>
+        
+        <Label Text="{Binding title}" FontSize="50"/>
+            <Label Text="{Binding year}" FontSize="20"/>
+            <Label Text="{Binding director}" FontSize="20"/>
+            <Label Text="{Binding rating}" FontSize="20"/>
+            <Label Text="{Binding emoji}" FontSize="20"/>
+        <Label Text="{Binding GenresDisplay}" FontSize="20"/>
 
         <Button Text="Mark as Favourite" Clicked="Back_Clicked"/>
         <Button Text="Back" Clicked="Back_Clicked"/>

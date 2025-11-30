@@ -15,7 +15,18 @@
             else
             {
                 MainPage = new NavigationPage(new MainPage());
-            }
+            } 
+            MainPage = new NavigationPage(new MainPage());
+
+
+            MainPage = new NavigationPage(new MainPage())
+            {
+                BarBackgroundColor = Colors.DarkSlateGray, // same as your page background
+                BarTextColor = Colors.White
+            };
+
+
+
         }
     }
 }

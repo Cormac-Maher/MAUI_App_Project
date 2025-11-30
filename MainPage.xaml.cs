@@ -1,5 +1,8 @@
-﻿using Microsoft.Maui.Controls;
+﻿// using Android.Graphics;
+using Microsoft.Maui.Controls;
 using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -23,7 +26,7 @@ namespace MovieExplorer
 
             if (!string.IsNullOrEmpty(userName))
             {
-                GreetingLabel.Text = $"Hello, {userName}! Welcome back to Movie Explorer";
+                GreetingLabel.Text = $"Hello {userName}! Welcome to the Movie Explorer";
             }
             else
             {
@@ -49,7 +52,7 @@ namespace MovieExplorer
                 GridPageContent.AddRowDefinition(new RowDefinition());
 
             for (int c = 0; c < columns; c++)
-                GridPageContent.AddColumnDefinition(new ColumnDefinition());
+                GridPageContent.AddColumnDefinition(new ColumnDefinition { Width = GridLength.Star });    // Using Star so all cols adjust to the size of the window
 
             int i = 0;
 
@@ -68,12 +71,19 @@ namespace MovieExplorer
                             BindingContext = movie
                         };
 
-                        info.Children.Add(CreateBoundLabel("title", 38));
-                        info.Children.Add(CreateBoundLabel("year", 18));
-                        info.Children.Add(CreateBoundLabel("genre", 18));
-                        info.Children.Add(CreateBoundLabel("director", 18));
-                        info.Children.Add(CreateBoundLabel("rating", 18));
-                        info.Children.Add(CreateBoundLabel("emoji", 18));
+                        info.Children.Add(CreateLabel("title", 38));
+                        info.Children.Add(CreateLabel("year", 18));
+
+                        var genreLabel = new Label
+                        {
+                            FontSize = 18,
+                            TextColor = Colors.Black,
+                            Text = movie.genre == null ? "" : string.Join(", ", movie.genre)
+                        };
+                        info.Children.Add(genreLabel);
+                        info.Children.Add(CreateLabel("director", 18)); 
+                        info.Children.Add(CreateLabel("rating", 18));
+                        info.Children.Add(CreateLabel("emoji", 18));
 
                         Border styledBorder = new Border
                         {
@@ -83,13 +93,20 @@ namespace MovieExplorer
                             Content = info
                         };
 
+                        var tapGesture = new TapGestureRecognizer();     // Tap gesture recogniser so user can tap on a movie to see details
+                        tapGesture.Tapped += async (s, e) =>
+                        {
+                            await Navigation.PushAsync(new MovieContentPage(movie));
+                        };
+                        styledBorder.GestureRecognizers.Add(tapGesture);
+
                         GridPageContent.Add(styledBorder, c, r);
                         i++;
                     }
                 }
             }
         }
-        private Label CreateBoundLabel(string property, int fontSize)
+        private Label CreateLabel(string property, int fontSize)
         {
             var label = new Label
             {
@@ -99,6 +116,7 @@ namespace MovieExplorer
             label.SetBinding(Label.TextProperty, property);
             return label;
         }
+
 
 
 
@@ -150,6 +168,8 @@ namespace MovieExplorer
 
         }
 
+
+
     }
 }
 
@@ -158,3 +178,55 @@ namespace MovieExplorer
           var movies = await _httpClient.GetFromJsonAsync<List<Movies>>(fileUrl);
           return movies;
       }**/
+
+/*
+  public string myLibraryName = "My Library";
+  private Movies _selectedMovie;
+  public event PropertyChangedEventHandler? PropertyChanged;
+  protected virtual void OnPropertyChanged(string? propertyName = null)
+  {
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+  }
+  public ObservableCollection<Movies> Movies { get; set; }
+  public Movies SelectedMovies
+  {
+      get { return _selectedMovie; }
+
+
+      set
+      {
+          if (_selectedMovie != value)
+          {
+              _selectedMovie = value;
+              OnPropertyChanged();
+          }
+      }
+  }
+
+  public string LibraryName
+  {
+      get { return myLibraryName; }
+
+      set
+      {
+          if (myLibraryName != value)
+          {
+              myLibraryName = value;
+              OnPropertyChanged();
+          }
+      }
+  }
+  private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+  {
+
+      if (e.CurrentSelection.FirstOrDefault() is Movies selectedMovie)
+      {
+          var parameters = new Dictionary<string, object>
+          {
+              { "Movies", selectedMovie}
+          };
+          await Shell.Current.GoToAsync(nameof(MovieContentPage), parameters);
+          ((CollectionView)sender).SelectedItem = null;
+      }
+      ;
+  } */

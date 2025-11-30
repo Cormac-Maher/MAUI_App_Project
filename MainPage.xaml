@@ -1,13 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MovieExplorer.MainPage">
+             x:Class="MovieExplorer.MainPage"
+             BackgroundColor="DarkSlateGray" 
+             Title=""
+             NavigationPage.HasNavigationBar="False">
+   
+
 
     <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
-            Spacing="25"
-            Background="DarkGrey">
+            Spacing="25">
+
             <CollectionView x:Name="MoviesCollectionView">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -22,17 +27,21 @@
 
             <Label 
                 x:Name="GreetingLabel"
-                FontSize="22"
+                FontSize="40"
                 TextColor="White"
                 HorizontalOptions="Center" />
 
+
 <!--            <Entry Text="{Binding userName}"/>
             <Button Text="Submit" x:Name="SubmitBtn1" Clicked="EnterName_Clicked"/> -->
-            
-            <Grid x:Name="GridPageContent" BackgroundColor="DarkGrey"
-                HeightRequest="10000" WidthRequest="1500"
-                HorizontalOptions="Center"
-                VerticalOptions="Center">
+
+            <Grid x:Name="GridPageContent" BackgroundColor="DarkSlateGray"
+                HeightRequest="7500" 
+      RowSpacing="10"
+      ColumnSpacing="10"
+      HorizontalOptions="Center"
+      VerticalOptions="Center">
+ 
             </Grid>
 
         </VerticalStackLayout>
