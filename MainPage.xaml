@@ -13,7 +13,35 @@
             Padding="30,0"
             Spacing="25">
 
-            <CollectionView x:Name="MoviesCollectionView">
+            <SearchBar x:Name="MovieSearchBar"
+           Placeholder="Search movies..."
+           TextChanged="OnSearch"
+           TextColor="White"
+           PlaceholderColor="LightGray" />
+
+
+            <Label 
+                x:Name="GreetingLabel"
+                FontSize="40"
+                TextColor="White"
+                HorizontalOptions="Center" />
+
+            <Grid x:Name="GridPageContent" BackgroundColor="DarkSlateGray" 
+                  RowSpacing="10"
+                  ColumnSpacing="10"
+                  HorizontalOptions="Center"
+                  VerticalOptions="Center">
+ 
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
+<!--            <Entry Text="{Binding userName}"/>
+            <Button Text="Submit" x:Name="SubmitBtn1" Clicked="EnterName_Clicked"/> 
+    
+                <CollectionView x:Name="MoviesCollectionView">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <HorizontalStackLayout Padding="10">
@@ -23,26 +51,4 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
-
-            <Label 
-                x:Name="GreetingLabel"
-                FontSize="40"
-                TextColor="White"
-                HorizontalOptions="Center" />
-
-            <Grid x:Name="GridPageContent" BackgroundColor="DarkSlateGray"
-                HeightRequest="7500" 
-      RowSpacing="10"
-      ColumnSpacing="10"
-      HorizontalOptions="Center"
-      VerticalOptions="Center">
- 
-            </Grid>
-
-        </VerticalStackLayout>
-    </ScrollView>
-
-</ContentPage>
-<!--            <Entry Text="{Binding userName}"/>
-            <Button Text="Submit" x:Name="SubmitBtn1" Clicked="EnterName_Clicked"/> -->
+    -->

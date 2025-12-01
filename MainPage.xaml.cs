@@ -14,14 +14,14 @@ namespace MovieExplorer
     public partial class MainPage : ContentPage
     {
 
-  //    private List<Movies> _movies = new();
+        private List<Movies> _allMovies = new();   // Made a list with all the movies
         string userName;
         public MainPage()
         {
 
             InitializeComponent();
             LoadJsonAsync();
-            LoadMovies();
+ //           LoadMovies();
             userName = Preferences.Get("UserName", string.Empty);
 
             if (!string.IsNullOrEmpty(userName))
@@ -126,10 +126,6 @@ namespace MovieExplorer
         string fileUrl = "https://raw.githubusercontent.com/DonH-ITS/jsonfiles/refs/heads/main/moviesemoji.json";
 
         private readonly MovieService _movieService = new MovieService();
-        private async void LoadMovies()
-        {
-            MoviesCollectionView.ItemsSource = await _movieService.GetMoviesAsync();
-        }
 
 
         private async void LoadJsonAsync()
@@ -142,8 +138,9 @@ namespace MovieExplorer
                 jsonContent = await File.ReadAllTextAsync(path);
                 Console.WriteLine("Already dowloaded code!");
                 var movies = JsonSerializer.Deserialize<List<Movies>>(jsonContent);
-   //             GridView.ItemsSource = movies;
-                CreateTheGrid(movies);
+
+                _allMovies = movies;
+                CreateTheGrid(_allMovies);
             }
             else
             {
@@ -156,8 +153,9 @@ namespace MovieExplorer
                         await File.WriteAllTextAsync(path, jsonContent);
                         var movies = JsonSerializer.Deserialize<List<Movies>>(jsonContent);
                         Console.WriteLine($"Movies loaded: {movies?.Count}");
-                        //                    GridView.ItemsSource = movies;
-                        CreateTheGrid(movies);
+
+                        _allMovies = movies;
+                        CreateTheGrid(_allMovies);
                     }
                 }
                 catch(Exception ex) {
@@ -168,6 +166,24 @@ namespace MovieExplorer
 
         }
 
+
+        private void OnSearch(object sender, TextChangedEventArgs e)
+        {
+            var keyword = e.NewTextValue?.ToLower();
+
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                CreateTheGrid(_allMovies);
+            }
+            else
+            {
+                var filteredMovies = _allMovies
+                    .Where(m => m.title.ToLower().Contains(keyword))
+                    .ToList();
+
+                CreateTheGrid(filteredMovies);
+            }
+        }
 
 
     }
@@ -180,6 +196,12 @@ namespace MovieExplorer
       }**/
 
 /*
+ * 
+ *         private async void LoadMovies()
+        {
+            MoviesCollectionView.ItemsSource = await _movieService.GetMoviesAsync();
+        }
+
   public string myLibraryName = "My Library";
   private Movies _selectedMovie;
   public event PropertyChangedEventHandler? PropertyChanged;

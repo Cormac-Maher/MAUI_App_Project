@@ -17,4 +17,4 @@
         <Button Text="Mark as Favourite"/>
         <Button Text="Back" Clicked="Back_Clicked"/>
     </VerticalStackLayout>
-</ContentPage>
+</ContentPage>   
