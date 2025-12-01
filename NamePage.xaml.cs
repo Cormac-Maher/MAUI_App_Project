@@ -12,10 +12,8 @@ public partial class NamePage : ContentPage
 
         if (!string.IsNullOrWhiteSpace(userName))
         {
-            // Save name in Preferences
             Preferences.Set("UserName", userName);
 
-            // Navigate to MainPage
             await Navigation.PushAsync(new MainPage());
         }
         else

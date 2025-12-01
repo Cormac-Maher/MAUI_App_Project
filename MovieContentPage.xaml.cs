@@ -9,6 +9,6 @@ public partial class MovieContentPage : ContentPage
     }
     private async void Back_Clicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("..");
+        await Navigation.PopAsync();
     }
 }
