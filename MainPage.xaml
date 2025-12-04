@@ -22,6 +22,7 @@
 
             <Label 
                 x:Name="GreetingLabel"
+                Text=""
                 FontSize="40"
                 TextColor="White"
                 HorizontalOptions="Center" />

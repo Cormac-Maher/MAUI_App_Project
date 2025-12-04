@@ -11,4 +11,24 @@ public partial class MovieContentPage : ContentPage
     {
         await Navigation.PopAsync();
     }
+
+    private async void Favourite_Clicked(object sender, EventArgs e)
+    {
+        bool isFavourite = Preferences.Get("Favourite_" + ((Movies)BindingContext).title, false);
+        isFavourite = !isFavourite;
+        Preferences.Set("Favourite_" + ((Movies)BindingContext).title, isFavourite);
+         
+        string userName;
+
+ /*       if (!string.IsNullOrWhiteSpace(userName))
+        {
+            Preferences.Set("UserName", userName);
+
+            await Navigation.PushAsync(new MainPage());
+        }
+        else
+        {
+            await DisplayAlert("Error", "Please enter a valid name.", "OK");
+        }     */
+    }
 }

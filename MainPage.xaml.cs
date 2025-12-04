@@ -18,12 +18,8 @@ namespace MovieExplorer
         string userName;
         public MainPage()
         {
-
             InitializeComponent();
-            LoadJsonAsync();
- //           LoadMovies();
             userName = Preferences.Get("UserName", string.Empty);
-
             if (!string.IsNullOrEmpty(userName))
             {
                 GreetingLabel.Text = $"Hello {userName}! Welcome to the Movie Explorer";
@@ -32,6 +28,7 @@ namespace MovieExplorer
             {
                 GreetingLabel.Text = "Hello! Please enter your name.";
             }
+            LoadJsonAsync();
         }
 
   
@@ -96,7 +93,7 @@ namespace MovieExplorer
                         var tapGesture = new TapGestureRecognizer();     // Tap gesture recogniser so user can tap on a movie to see details
                         tapGesture.Tapped += async (s, e) =>
                         {
-                            await Navigation.PushAsync(new MovieContentPage(movie));
+                            await Navigation.PushAsync(new MovieContentPage(movie));     // When the user taps on a movie, the Movie Content page will load
                         };
                         styledBorder.GestureRecognizers.Add(tapGesture);
 
@@ -125,7 +122,7 @@ namespace MovieExplorer
         string fileName = "moviesemoji.json";
         string fileUrl = "https://raw.githubusercontent.com/DonH-ITS/jsonfiles/refs/heads/main/moviesemoji.json";
 
-        private readonly MovieService _movieService = new MovieService();
+//        private readonly MovieService _movieService = new MovieService();
 
 
         private async void LoadJsonAsync()
@@ -167,7 +164,7 @@ namespace MovieExplorer
         }
 
 
-        private void OnSearch(object sender, TextChangedEventArgs e)
+        private void OnSearch(object sender, TextChangedEventArgs e)               // Code for search bar
         {
             var keyword = e.NewTextValue?.ToLower();
 
@@ -177,9 +174,7 @@ namespace MovieExplorer
             }
             else
             {
-                var filteredMovies = _allMovies
-                    .Where(m => m.title.ToLower().Contains(keyword))
-                    .ToList();
+                var filteredMovies = _allMovies.Where(m => m.title.ToLower().Contains(keyword)).ToList();       //Shows only the movies that contain the searched word
 
                 CreateTheGrid(filteredMovies);
             }

@@ -14,7 +14,7 @@
             <Label Text="{Binding emoji}" FontSize="20"/>
         <Label Text="{Binding GenresDisplay}" FontSize="20"/>
 
-        <Button Text="Mark as Favourite"/>
+        <Button Text="Mark as Favourite" Clicked="Favourite_Clicked"/>
         <Button Text="Back" Clicked="Back_Clicked"/>
     </VerticalStackLayout>
 </ContentPage>   
