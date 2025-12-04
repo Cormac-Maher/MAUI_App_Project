@@ -35,7 +35,7 @@ namespace MovieExplorer
 
 
 
-
+         
         private void CreateTheGrid(List<Movies> movies)  
         {
             GridPageContent.RowDefinitions.Clear();    
