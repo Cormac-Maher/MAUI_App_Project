@@ -17,7 +17,7 @@
             }
             else
             {
-                MainPage = new NavigationPage(new NamePage());
+                MainPage = new NavigationPage(new MainPage());
             } 
 
 
