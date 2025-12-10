@@ -19,6 +19,12 @@
            TextColor="White"
            PlaceholderColor="LightGray" />
 
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Button Text="Title" Clicked="SortByClicked"/>
+                <Button Text="Director" Clicked="SortByClicked"/>
+                <Button Text="Year" Clicked="SortByClicked"/>
+                <Button Text="Rating" Clicked="SortByClicked"/>
+            </HorizontalStackLayout>
 
             <Label 
                 x:Name="GreetingLabel"
@@ -27,6 +33,7 @@
                 TextColor="White"
                 HorizontalOptions="Center" />
 
+            
             <Grid x:Name="GridPageContent" BackgroundColor="DarkSlateGray" 
                   RowSpacing="10"
                   ColumnSpacing="10"

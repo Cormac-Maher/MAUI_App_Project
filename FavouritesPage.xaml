@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovieExplorer.FavouritesPage"
+             Title="FavouritesPage">
+    
+    <ScrollView>
+        <VerticalStackLayout
+         Padding="30,0"
+         Spacing="25">
+
+            <SearchBar x:Name="MovieSearchBar"
+        Placeholder="Search favourite movies..."
+        TextChanged="OnSearch"
+        TextColor="White"
+        PlaceholderColor="LightGray" />
+
+            <Label 
+             Text="Welcome to your favourites page"
+             FontSize="40"
+             TextColor="White"
+             HorizontalOptions="Center" />
+
+            <Grid x:Name="GridPageContent" BackgroundColor="DarkSlateGray" 
+               RowSpacing="10"
+               ColumnSpacing="10"
+               HorizontalOptions="Center"
+               VerticalOptions="Center">
+
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

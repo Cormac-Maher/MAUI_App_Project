@@ -4,9 +4,12 @@
     {
         public App()
         {
+            
             InitializeComponent();
 
-            string userName = Preferences.Get("UserName", string.Empty);
+            
+
+             string userName = Preferences.Get("UserName", string.Empty);
 
             if (string.IsNullOrEmpty(userName))
             {
@@ -14,17 +17,8 @@
             }
             else
             {
-                MainPage = new NavigationPage(new MainPage());
+                MainPage = new NavigationPage(new NamePage());
             } 
-            MainPage = new NavigationPage(new MainPage());
-
-
-            MainPage = new NavigationPage(new MainPage())
-            {
-                BarBackgroundColor = Colors.DarkSlateGray, // same as your page background
-                BarTextColor = Colors.White
-            };
-
 
 
         }

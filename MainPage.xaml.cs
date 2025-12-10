@@ -38,7 +38,7 @@ namespace MovieExplorer
          
         private void CreateTheGrid(List<Movies> movies)  
         {
-            GridPageContent.RowDefinitions.Clear();    
+            GridPageContent.RowDefinitions.Clear();     
             GridPageContent.ColumnDefinitions.Clear(); 
             GridPageContent.Children.Clear();          
 
@@ -180,9 +180,65 @@ namespace MovieExplorer
             }
         }
 
+        public void SortMovies(string sortBy)
+        {
+            switch (sortBy)
+            {
+                case "Title":
+                    _allMovies = _allMovies.OrderBy(m => m.title).ToList();
+                    break;
+                case "Director":
+                    _allMovies = _allMovies.OrderBy(m => m.director).ToList();
+                    break;
+                case "Year":
+                    _allMovies = _allMovies.OrderBy(m => m.year).ToList();
+                    break;
+                case "Rating":
+                    _allMovies = _allMovies
+                        .OrderByDescending(m => m.rating)  
+                        .ToList();
+                    break;
+            }
+
+            CreateTheGrid(_allMovies);
+        }
+
+        private void SortByClicked(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            SortMovies(btn.Text);
+        }
+
+
 
     }
 }
+
+/*       private void SortByClicked(object sender, EventArgs e)
+       {
+           Button btn = (Button)sender;
+           SortMovies(btn.Text);
+       }
+
+       public void SortMovies(string sortBy)
+       {
+           switch (sortBy)
+           {
+               case "Title":
+                   _allMovies = _allMovies.OrderBy(m => m.title).ToList();
+                   break;
+               case "Director":
+                   _allMovies = _allMovies.OrderBy(m => m.director).ToList();
+                   break;
+               case "Year":
+                   _allMovies = _allMovies.OrderByDescending(m => m.year).ToList();
+                   break;
+               case "Rating":
+                   _allMovies = _allMovies.OrderByDescending(m => m.rating).ToList();
+                   break;
+           }
+           CreateTheGrid(_allMovies);
+       } */
 
 /**      public async Task<List<Movies>> GetMoviesAsync(string fileUrl)
       {

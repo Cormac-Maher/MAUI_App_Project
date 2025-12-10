@@ -1,19 +1,33 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MovieExplorer.NamePage">
+             x:Class="MovieExplorer.NamePage"             
+             BackgroundColor="DarkSlateGray" 
+             Title=""
+             NavigationPage.HasNavigationBar="False">
 
     <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
+        <Label Text="Welcome to the Movie Explorer App!" 
+               HorizontalOptions="Center" 
+               FontSize="50"
+               TextColor="White"/>
+
         <Label Text="Please enter your name:"
-               FontSize="20"
-               HorizontalOptions="Center" />
+               HorizontalOptions="Center" 
+               FontSize="40"
+               TextColor="White"
+               />
 
         <Entry x:Name="NameEntry"
                Placeholder="Your name here"
-               FontSize="18" />
+               FontSize="18" 
+               HorizontalOptions="Center"
+               WidthRequest="500"/>
 
         <Button Text="Submit"
                 Clicked="OnSubmitClicked"
-                FontSize="18" />
+                FontSize="18" 
+                HorizontalOptions="Center"
+                WidthRequest="500"/>
     </VerticalStackLayout>
 </ContentPage>
