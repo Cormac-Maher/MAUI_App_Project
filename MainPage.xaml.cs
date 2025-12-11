@@ -31,11 +31,15 @@ namespace MovieExplorer
             LoadJsonAsync();
         }
 
-  
+        private async void OnSettingsClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(SettingsPage));
+
+        }
 
 
 
-         
+
         private void CreateTheGrid(List<Movies> movies)  
         {
             GridPageContent.RowDefinitions.Clear();     

@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieExplorer.MainPage"
-             BackgroundColor="DarkSlateGray" 
+             BackgroundColor="{DynamicResource AppBackgroundColor}"
              Title=""
              NavigationPage.HasNavigationBar="False">
    
@@ -19,6 +19,10 @@
            TextColor="White"
            PlaceholderColor="LightGray" />
 
+            <Button 
+                Text="Go to Settings"
+                Clicked="OnSettingsClicked"/>
+            
             <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
                 <Button Text="Title" Clicked="SortByClicked"/>
                 <Button Text="Director" Clicked="SortByClicked"/>
