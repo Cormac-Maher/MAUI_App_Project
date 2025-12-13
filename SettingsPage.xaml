@@ -2,27 +2,25 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieExplorer.SettingsPage"
-             Title="Settings">
+             Title="Settings"
+             BackgroundColor="{DynamicResource AppBackgroundColor}">
 
     <VerticalStackLayout Padding="20" Spacing="15">
 
         <Label Text="Background Color" 
                    FontSize="18" 
                    FontAttributes="Bold"/>
-        
-        <Picker x:Name="ColorPicker"
-                Title="Select a colour"
-                SelectedIndexChanged="OnColorSelected">
-            <Picker.Items>
-                <x:String>DarkSlateGray</x:String>
-                <x:String>Black</x:String>
-                <x:String>White</x:String>
-                <x:String>LightBlue</x:String>
-                <x:String>Beige</x:String>
-            </Picker.Items>
-        </Picker>
 
+        <HorizontalStackLayout>
+            <Button Text="Default" Clicked="OnColourSelected" BackgroundColor="DarkSlateGray" />
+            <Button Text="Red" Clicked="OnColourSelected"  BackgroundColor="Red"/>
+            <Button Text="Blue" Clicked="OnColourSelected" BackgroundColor="Blue" />
+            <Button Text="Green" Clicked="OnColourSelected" BackgroundColor="Green" />
+            <Button Text="Black" Clicked="OnColourSelected" BackgroundColor="Black"/>
+        </HorizontalStackLayout>
+        
         <Button Text="Go to Favourites"
+                
                 Clicked="OnFavouritesClicked"/>
     </VerticalStackLayout>
 </ContentPage>

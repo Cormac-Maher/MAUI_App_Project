@@ -1,3 +1,5 @@
+using Microsoft.Maui.Graphics.Win2D;
+
 namespace MovieExplorer;
 
 public partial class SettingsPage : ContentPage
@@ -6,14 +8,14 @@ public partial class SettingsPage : ContentPage
     {
         InitializeComponent();
     }
-    private void OnColorSelected(object sender, EventArgs e)
-    {
-        var selectedColor = ColorPicker.SelectedItem?.ToString();
 
-        if (!string.IsNullOrEmpty(selectedColor))
+    private void OnColourSelected(object sender, EventArgs e)
+    {
+        if (sender is Button button)
         {
-            Preferences.Set("BackgroundColor", selectedColor);
-            Application.Current.Resources["AppBackgroundColor"] = Color.FromArgb(selectedColor);
+            Color colour = button.BackgroundColor;
+            App.Current.Resources["AppBackgroundColor"] = colour;
+            DisplayAlert("", "Updated background colour!", "OK");
         }
     }
 

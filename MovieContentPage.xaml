@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieExplorer.MovieContentPage"
              Title="MovieContentPage"
-             BackgroundColor="DarkSlateGray" 
+             BackgroundColor="{DynamicResource AppBackgroundColor}"
              NavigationPage.HasNavigationBar="False">
     <VerticalStackLayout Padding="20">
         

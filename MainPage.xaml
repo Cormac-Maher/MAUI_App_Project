@@ -37,13 +37,11 @@
                 TextColor="White"
                 HorizontalOptions="Center" />
 
-            
-            <Grid x:Name="GridPageContent" BackgroundColor="DarkSlateGray" 
+            <Grid x:Name="GridPageContent" BackgroundColor="{DynamicResource AppBackgroundColor}" 
                   RowSpacing="10"
                   ColumnSpacing="10"
                   HorizontalOptions="Center"
                   VerticalOptions="Center">
- 
             </Grid>
 
         </VerticalStackLayout>

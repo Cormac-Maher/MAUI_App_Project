@@ -7,8 +7,9 @@
 
             InitializeComponent();
 
-            string savedColor = Preferences.Get("BackgroundColor", "DarkSlateGray");
+            string savedColor = Preferences.Get("BackgroundColor", "DarkSlateGrey");
             Application.Current.Resources["AppBackgroundColor"] = Color.FromArgb(savedColor);
+            App.Current.Resources["AppBackgroundColor"] = Colors.DarkSlateGrey;
 
             string userName = Preferences.Get("UserName", string.Empty);
             if (string.IsNullOrEmpty(userName))
