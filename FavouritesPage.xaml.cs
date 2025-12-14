@@ -4,16 +4,29 @@ namespace MovieExplorer;
 
 public partial class FavouritesPage : ContentPage
 { 
-	private List<Movies> _allMovies = new();   
-	public FavouritesPage()
+	private List<Movies> _allMovies = new();
+    private readonly GetMovies _movieService = new GetMovies();
+
+    public FavouritesPage()
 	{
 		InitializeComponent();
 
-        var favourites = Preferences.Get("Favourites", string.Empty).Split('|', StringSplitOptions.RemoveEmptyEntries).ToList();
-        var favouriteMovies = _allMovies.Where(m => favourites.Contains(m.title)).ToList();
+        LoadFavourites();
+    }
+    private async void LoadFavourites()
+    {
+        _allMovies = await _movieService.LoadMoviesAsync();
+
+        var favourites = Preferences.Get("Favourites", string.Empty)
+            .Split('|', StringSplitOptions.RemoveEmptyEntries)
+            .ToList();
+
+        var favouriteMovies = _allMovies
+            .Where(m => favourites.Contains(m.title))
+            .ToList();
+
         CreateTheGrid(favouriteMovies);
     }
-
     private void CreateTheGrid(List<Movies> movies)    // Same code as MainPage.xaml.cs to create the grid
     {
         GridPageContent.RowDefinitions.Clear();
@@ -65,6 +78,7 @@ public partial class FavouritesPage : ContentPage
                         BackgroundColor = Colors.Red,
                         Stroke = Colors.Black,
                         StrokeThickness = 3,
+                        Padding = 10,
                         Content = info
                     };
 

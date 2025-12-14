@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieExplorer.MovieContentPage"
-             Title="MovieContentPage"
+             Title=""
              BackgroundColor="{DynamicResource AppBackgroundColor}"
              NavigationPage.HasNavigationBar="False">
     <VerticalStackLayout Padding="20">

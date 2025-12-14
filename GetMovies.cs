@@ -1,20 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace MovieExplorer
 {
-    public class MovieService
+    public class GetMovies
     {
-        private readonly HttpClient _httpClient = new HttpClient();
+        private readonly string fileName = "moviesemoji.json";
+        private readonly string fileUrl = "https://raw.githubusercontent.com/DonH-ITS/jsonfiles/refs/heads/main/moviesemoji.json";
 
-        public async Task<List<Movies>> GetMoviesAsync()
+        public async Task<List<Movies>> LoadMoviesAsync()
         {
-            var url = "https://raw.githubusercontent.com/DonH-ITS/jsonfiles/refs/heads/main/moviesemoji.json";
-            return await _httpClient.GetFromJsonAsync<List<Movies>>(url);
+            string path = Path.Combine(FileSystem.AppDataDirectory, fileName);
+            string jsonContent;
+
+            if (File.Exists(path))
+            {
+                jsonContent = await File.ReadAllTextAsync(path);
+            }
+            else
+            {
+                using var httpClient = new HttpClient();
+                var response = await httpClient.GetAsync(fileUrl);
+                if (response == null || !response.IsSuccessStatusCode)
+                    return new List<Movies>();
+
+                jsonContent = await response.Content.ReadAsStringAsync();
+                await File.WriteAllTextAsync(path, jsonContent);
+            }
+
+            var movies = JsonSerializer.Deserialize<List<Movies>>(jsonContent);
+            return movies ?? new List<Movies>();
         }
     }
 }

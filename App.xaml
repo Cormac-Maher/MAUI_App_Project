@@ -6,6 +6,7 @@
 
     <Application.Resources>
         <Color x:Key="AppBackgroundColor">DarkSlateGrey</Color>
+
     </Application.Resources>
 
 </Application>

@@ -13,7 +13,7 @@ namespace MovieExplorer
 {
     public partial class MainPage : ContentPage
     {
-
+        private readonly GetMovies _movieService = new GetMovies();
         private List<Movies> _allMovies = new();   // Made a list with all the movies
         string userName;
         public MainPage()
@@ -40,13 +40,13 @@ namespace MovieExplorer
 
 
 
-        private void CreateTheGrid(List<Movies> movies)  
+        private void CreateTheGrid(List<Movies> movies)
         {
-            GridPageContent.RowDefinitions.Clear();     
-            GridPageContent.ColumnDefinitions.Clear(); 
-            GridPageContent.Children.Clear();          
+            GridPageContent.RowDefinitions.Clear();
+            GridPageContent.ColumnDefinitions.Clear();
+            GridPageContent.Children.Clear();
 
-            int columns = 3;
+            int columns = 2;
             int rows = (int)Math.Ceiling((double)movies.Count / columns);
 
             for (int r = 0; r < rows; r++)
@@ -82,7 +82,7 @@ namespace MovieExplorer
                             Text = movie.genre == null ? "" : string.Join(", ", movie.genre)
                         };
                         info.Children.Add(genreLabel);
-                        info.Children.Add(CreateLabel("director", 18)); 
+                        info.Children.Add(CreateLabel("director", 18));
                         info.Children.Add(CreateLabel("rating", 18));
                         info.Children.Add(CreateLabel("emoji", 18));
 
@@ -90,7 +90,7 @@ namespace MovieExplorer
                         {
                             BackgroundColor = Colors.Red,
                             Stroke = Colors.Black,
-                            StrokeThickness = 3,
+                            Padding = 10,
                             Content = info
                         };
 
@@ -126,45 +126,13 @@ namespace MovieExplorer
         string fileName = "moviesemoji.json";
         string fileUrl = "https://raw.githubusercontent.com/DonH-ITS/jsonfiles/refs/heads/main/moviesemoji.json";
 
-//        private readonly MovieService _movieService = new MovieService();
+        //        private readonly MovieService _movieService = new MovieService();
 
 
         private async void LoadJsonAsync()
         {
-            string path = Path.Combine(FileSystem.AppDataDirectory, fileName);
-            string jsonContent;
-            _httpClient = new HttpClient();
-            if (File.Exists(path))
-            {
-                jsonContent = await File.ReadAllTextAsync(path);
-                Console.WriteLine("Already dowloaded code!");
-                var movies = JsonSerializer.Deserialize<List<Movies>>(jsonContent);
-
-                _allMovies = movies;
-                CreateTheGrid(_allMovies);
-            }
-            else
-            {
-                try {
-                    var response = await _httpClient.GetAsync(fileUrl);
-                    if (response != null && response.IsSuccessStatusCode)
-                    {
-                        jsonContent = await response.Content.ReadAsStringAsync();
-
-                        await File.WriteAllTextAsync(path, jsonContent);
-                        var movies = JsonSerializer.Deserialize<List<Movies>>(jsonContent);
-                        Console.WriteLine($"Movies loaded: {movies?.Count}");
-
-                        _allMovies = movies;
-                        CreateTheGrid(_allMovies);
-                    }
-                }
-                catch(Exception ex) {
-                    Console.WriteLine($"Error: {ex.Message}");
-                    return;
-                }
-            }
-
+            _allMovies = await _movieService.LoadMoviesAsync();
+            CreateTheGrid(_allMovies);
         }
 
 
@@ -199,7 +167,7 @@ namespace MovieExplorer
                     break;
                 case "Rating":
                     _allMovies = _allMovies
-                        .OrderByDescending(m => m.rating)  
+                        .OrderByDescending(m => m.rating)
                         .ToList();
                     break;
             }
@@ -217,6 +185,7 @@ namespace MovieExplorer
 
     }
 }
+
 
 /*       private void SortByClicked(object sender, EventArgs e)
        {

@@ -2,13 +2,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieExplorer.SettingsPage"
-             Title="Settings"
-             BackgroundColor="{DynamicResource AppBackgroundColor}">
+             Title=""
+             BackgroundColor="{DynamicResource AppBackgroundColor}"
+             NavigationPage.HasNavigationBar="False">
 
     <VerticalStackLayout Padding="20" Spacing="15">
 
-        <Label Text="Background Color" 
-                   FontSize="18" 
+        <Label Text=" Select Background Colour" 
+                   FontSize="40" 
                    FontAttributes="Bold"/>
 
         <HorizontalStackLayout>
@@ -18,9 +19,23 @@
             <Button Text="Green" Clicked="OnColourSelected" BackgroundColor="Green" />
             <Button Text="Black" Clicked="OnColourSelected" BackgroundColor="Black"/>
         </HorizontalStackLayout>
-        
+
+        <Label Text=" Select Background Colour Movie Grid" 
+                   FontSize="40" 
+                   FontAttributes="Bold"/>
+
+        <HorizontalStackLayout>
+            <Button Text="Default" Clicked="OnGridSelected" BackgroundColor="Red" />
+            <Button Text="Red" Clicked="OnGridSelected"  BackgroundColor="Red"/>
+            <Button Text="Blue" Clicked="OnGridSelected" BackgroundColor="Blue" />
+            <Button Text="Green" Clicked="OnGridSelected" BackgroundColor="Green" />
+            <Button Text="Black" Clicked="OnGridSelected" BackgroundColor="Black"/>
+        </HorizontalStackLayout>
+
+
         <Button Text="Go to Favourites"
-                
+                BackgroundColor="Red" 
+                TextColor="Black"
                 Clicked="OnFavouritesClicked"/>
     </VerticalStackLayout>
 </ContentPage>

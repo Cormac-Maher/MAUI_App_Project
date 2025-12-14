@@ -5,10 +5,9 @@
              BackgroundColor="{DynamicResource AppBackgroundColor}"
              Title=""
              NavigationPage.HasNavigationBar="False">
-   
 
 
-    <ScrollView> 
+    <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
@@ -19,15 +18,14 @@
            TextColor="White"
            PlaceholderColor="LightGray" />
 
-            <Button 
-                Text="Go to Settings"
-                Clicked="OnSettingsClicked"/>
-            
+
+
             <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
-                <Button Text="Title" Clicked="SortByClicked"/>
-                <Button Text="Director" Clicked="SortByClicked"/>
-                <Button Text="Year" Clicked="SortByClicked"/>
-                <Button Text="Rating" Clicked="SortByClicked"/>
+                <Button Text="Go to Settings" TextColor="Black" Clicked="OnSettingsClicked" BackgroundColor="Red" BorderColor="Black"/>
+                <Button Text="Title" Clicked="SortByClicked" BackgroundColor="Red" TextColor="Black"/>
+                <Button Text="Director" Clicked="SortByClicked"  BackgroundColor="Red" TextColor="Black"/>
+                <Button Text="Year" Clicked="SortByClicked" BackgroundColor="Red" TextColor="Black"/>
+                <Button Text="Rating" Clicked="SortByClicked" BackgroundColor="Red" TextColor="Black"/>
             </HorizontalStackLayout>
 
             <Label 
@@ -37,11 +35,12 @@
                 TextColor="White"
                 HorizontalOptions="Center" />
 
-            <Grid x:Name="GridPageContent" BackgroundColor="{DynamicResource AppBackgroundColor}" 
+            <Grid x:Name="GridPageContent" 
                   RowSpacing="10"
                   ColumnSpacing="10"
                   HorizontalOptions="Center"
-                  VerticalOptions="Center">
+                  VerticalOptions="Center"
+                  >
             </Grid>
 
         </VerticalStackLayout>
