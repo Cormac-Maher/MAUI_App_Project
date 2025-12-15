@@ -9,13 +9,18 @@ public partial class SettingsPage : ContentPage
         InitializeComponent();
     }
 
-    private void OnColourSelected(object sender, EventArgs e)
+    private async void OnColourSelected(object sender, EventArgs e)
     {
         if (sender is Button button)
         {
+            await button.ScaleTo(2, 150);  
+            await button.RotateTo(720, 400);  
+            await button.ScaleTo(1.0, 300);   
+            button.Rotation = 0;
+
             Color colour = button.BackgroundColor;
             App.Current.Resources["AppBackgroundColor"] = colour;
-            DisplayAlert("", "Updated Background Colour!", "OK");
+            await DisplayAlert("", "Updated Background Colour!", "OK");
         }
     }
 

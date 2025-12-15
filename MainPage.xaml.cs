@@ -28,6 +28,7 @@ namespace MovieExplorer
             {
                 GreetingLabel.Text = "Hello! Please enter your name.";
             }
+
             LoadJsonAsync();
         }
 
@@ -133,6 +134,8 @@ namespace MovieExplorer
         {
             _allMovies = await _movieService.LoadMoviesAsync();
             CreateTheGrid(_allMovies);
+            var genres = _allMovies.Where(m => m.genre != null).SelectMany(m => m.genre).Distinct().OrderBy(g => g).ToList();
+            GenrePicker.ItemsSource = genres;
         }
 
 
@@ -152,9 +155,9 @@ namespace MovieExplorer
             }
         }
 
-        public void SortMovies(string sortBy)
+        public void SortMovies(string sort)
         {
-            switch (sortBy)
+            switch (sort)
             {
                 case "Title":
                     _allMovies = _allMovies.OrderBy(m => m.title).ToList();
@@ -163,27 +166,102 @@ namespace MovieExplorer
                     _allMovies = _allMovies.OrderBy(m => m.director).ToList();
                     break;
                 case "Year":
-                    _allMovies = _allMovies.OrderBy(m => m.year).ToList();
+                    _allMovies = _allMovies.OrderByDescending(m => m.year).ToList();
                     break;
                 case "Rating":
-                    _allMovies = _allMovies
-                        .OrderByDescending(m => m.rating)
-                        .ToList();
+                    _allMovies = _allMovies.OrderByDescending(m => m.rating).ToList();
                     break;
             }
 
             CreateTheGrid(_allMovies);
         }
 
-        private void SortByClicked(object sender, EventArgs e)
+        private async void SortByClicked(object sender, EventArgs e)      // Sometimes the app would crash when the ueer spammed sort buttons, so I disabled the buttons for a few seconds after sorting
         {
             Button btn = (Button)sender;
+
+            SortTitle.IsEnabled = false;
+            SortYear.IsEnabled = false;
+            SortRating.IsEnabled = false;
+            SortDirector.IsEnabled = false;
+
+            SortTitle.BackgroundColor = Colors.Gray;
+            SortYear.BackgroundColor = Colors.Gray;
+            SortRating.BackgroundColor = Colors.Gray;
+            SortDirector.BackgroundColor = Colors.Gray;
+            btn.BackgroundColor = Colors.Red;
+
+            GenrePicker.SelectedIndex = -1;
+            GreetingLabel.Text = "Sorting Movies";
+            await Task.Delay(500);
+            GreetingLabel.Text = "Sorting Movies.";
+            await Task.Delay(500);
+            GreetingLabel.Text = "Sorting Movies..";
+            await Task.Delay(500);
+            GreetingLabel.Text = "Sorting Movies...";
+            await Task.Delay(500);
+ 
             SortMovies(btn.Text);
+            GreetingLabel.Text = $"Hello {userName}! Welcome to the Movie Explorer";
+            await Task.Delay(3000);
+
+            SortTitle.IsEnabled = true;
+            SortYear.IsEnabled = true;
+            SortRating.IsEnabled = true;
+            SortDirector.IsEnabled = true;
+
+            SortTitle.BackgroundColor = Colors.Red;
+            SortYear.BackgroundColor = Colors.Red;
+            SortRating.BackgroundColor = Colors.Red;
+            SortDirector.BackgroundColor = Colors.Red;
         }
 
+        private async void OnGenreSelected(object sender, EventArgs e)
+        {
+            var picker = (Picker)sender;
+            var selectedGenre = picker.SelectedItem as string;
 
+            if (string.IsNullOrEmpty(selectedGenre))
+            {
+                CreateTheGrid(_allMovies);
+            }
+            else
+            {
+                var filteredMovies = _allMovies.Where(m => m.genre != null && m.genre.Contains(selectedGenre)).ToList();
+            
+                SortTitle.IsEnabled = false;
+                SortYear.IsEnabled = false;
+                SortRating.IsEnabled = false;
+                SortDirector.IsEnabled = false;
 
+                SortTitle.BackgroundColor = Colors.Gray;
+                SortYear.BackgroundColor = Colors.Gray;
+                SortRating.BackgroundColor = Colors.Gray;
+                SortDirector.BackgroundColor = Colors.Gray;
+
+                GreetingLabel.Text = "Filtering Movies";
+                await Task.Delay(200);
+                GreetingLabel.Text = "Filtering Movies.";
+                await Task.Delay(200);
+                GreetingLabel.Text = "Filtering Movies..";
+                await Task.Delay(200);
+                GreetingLabel.Text = "Filtering Movies...";
+                await Task.Delay(200);
+
+                CreateTheGrid(filteredMovies);
+                GreetingLabel.Text = $"Hello {userName}! Welcome to the Movie Explorer";
+                await Task.Delay(1000);
+
+                SortTitle.IsEnabled = true;
+                SortYear.IsEnabled = true;
+                SortRating.IsEnabled = true;
+                SortDirector.IsEnabled = true;
+
+                SortTitle.BackgroundColor = Colors.Red;
+                SortYear.BackgroundColor = Colors.Red;
+                SortRating.BackgroundColor = Colors.Red;
+                SortDirector.BackgroundColor = Colors.Red;
+            }
+        }
     }
 }
-
-

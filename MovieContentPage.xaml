@@ -14,9 +14,10 @@
             <Label Text="{Binding emoji}" FontSize="20"/>
         <Label Text="{Binding GenresDisplay}" FontSize="20"/>
 
-        <Label x:Name="FavouriteTimestamp" FontSize="16" TextColor="Gray"/>
+        <Label x:Name="FavouriteTimestamp" FontSize="20"/>
+
+        <Button x:Name="FavouriteButton" Text="Mark as Favourite" Clicked="Favourite_Clicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
+        <Button Text="Back" Clicked="Back_Clicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
         
-        <Button x:Name="FavouriteButton" Text="Mark as Favourite" Clicked="Favourite_Clicked"/>
-        <Button Text="Back" Clicked="Back_Clicked"/>
     </VerticalStackLayout>
 </ContentPage>   

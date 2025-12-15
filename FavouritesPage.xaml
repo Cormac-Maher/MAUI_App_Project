@@ -30,8 +30,8 @@
                VerticalOptions="Center">
 
             </Grid>
-            
-            <Button Text="Back" Clicked="Back_Clicked"/>
+
+            <Button Text="Back" Clicked="Back_Clicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

@@ -6,28 +6,24 @@
              BackgroundColor="{DynamicResource AppBackgroundColor}"
              NavigationPage.HasNavigationBar="False">
 
-    <VerticalStackLayout Padding="20" Spacing="15">
+    <VerticalStackLayout Padding="20" Spacing="15" HorizontalOptions="Center">
 
         <Label Text=" Select Background Colour" 
                    FontSize="40" 
                    FontAttributes="Bold"/>
 
-        <HorizontalStackLayout>
-            <Button Text="Default" Clicked="OnColourSelected" BackgroundColor="DarkSlateGray" />
-            <Button Text="Red" Clicked="OnColourSelected"  BackgroundColor="Red"/>
-            <Button Text="Blue" Clicked="OnColourSelected" BackgroundColor="Blue" />
-            <Button Text="Green" Clicked="OnColourSelected" BackgroundColor="Green" />
-            <Button Text="Black" Clicked="OnColourSelected" BackgroundColor="Black"/>
+        <HorizontalStackLayout Spacing="20" >
+            <Button Text="Default" Clicked="OnColourSelected" BackgroundColor="DarkSlateGray" Padding="15" BorderColor="Black"/>
+            <Button Text="Red" Clicked="OnColourSelected"  BackgroundColor="Red" Padding="15" BorderColor="Black"/>
+            <Button Text="Blue" Clicked="OnColourSelected" BackgroundColor="Blue" Padding="15" BorderColor="Black"/>
+            <Button Text="Green" Clicked="OnColourSelected" BackgroundColor="Green" Padding="15" BorderColor="Black"/>
+            <Button Text="Black" Clicked="OnColourSelected" BackgroundColor="Black" Padding="15" BorderColor="Black"/>
+            <Button Text="Purple" Clicked="OnColourSelected" BackgroundColor="Purple" Padding="15" BorderColor="Black"/>
         </HorizontalStackLayout>
 
-
-        <Button Text="Go to Favourites"
-                BackgroundColor="Red" 
-                TextColor="Black"
-                Clicked="OnFavouritesClicked"/>
+        <Button Text="Go to Favourites" BackgroundColor="Red" TextColor="Black" Clicked="OnFavouritesClicked" BorderColor="Black"/>
+        <Button Text="Change Name" Clicked="OnChangeName" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
+        <Button Text="Back" Clicked="Back_Clicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
         
-        <Button Text="Change Name" Clicked="OnChangeName"/>
-        
-        <Button Text="Back" Clicked="Back_Clicked"/>
     </VerticalStackLayout>
 </ContentPage>

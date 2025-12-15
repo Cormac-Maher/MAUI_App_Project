@@ -18,14 +18,17 @@
            TextColor="White"
            PlaceholderColor="LightGray" />
 
-
+            <Picker x:Name="GenrePicker"
+            Title="Select Genre"
+            SelectedIndexChanged="OnGenreSelected"
+            WidthRequest="200"/>
 
             <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
                 <Button Text="Go to Settings" TextColor="Black" Clicked="OnSettingsClicked" BackgroundColor="Red" BorderColor="Black"/>
-                <Button Text="Title" Clicked="SortByClicked" BackgroundColor="Red" TextColor="Black"/>
-                <Button Text="Director" Clicked="SortByClicked"  BackgroundColor="Red" TextColor="Black"/>
-                <Button Text="Year" Clicked="SortByClicked" BackgroundColor="Red" TextColor="Black"/>
-                <Button Text="Rating" Clicked="SortByClicked" BackgroundColor="Red" TextColor="Black"/>
+                <Button x:Name="SortTitle" Text="Title" Clicked="SortByClicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
+                <Button x:Name="SortDirector" Text="Director" Clicked="SortByClicked"  BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
+                <Button x:Name="SortYear" Text="Year" Clicked="SortByClicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
+                <Button x:Name="SortRating" Text="Rating" Clicked="SortByClicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
             </HorizontalStackLayout>
 
             <Label 
@@ -47,17 +50,3 @@
     </ScrollView>
 
 </ContentPage>
-<!--            <Entry Text="{Binding userName}"/>
-            <Button Text="Submit" x:Name="SubmitBtn1" Clicked="EnterName_Clicked"/> 
-    
-                <CollectionView x:Name="MoviesCollectionView">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <HorizontalStackLayout Padding="10">
-                            <Label Text="{Binding title}" FontSize="30" TextColor="White"/>
-                            <Label Text="{Binding year}" FontSize="20" VerticalOptions="Center"/>
-                        </HorizontalStackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-    -->

@@ -89,7 +89,7 @@ public partial class FavouritesPage : ContentPage
                     {
                         await Navigation.PushAsync(new MovieContentPage(movie));     // When the user taps on a movie, the Movie Content page will load
                     };
-                    styledBorder.GestureRecognizers.Add(tapGesture);
+                    styledBorder.GestureRecognizers.Add(tapGesture); 
 
                     GridPageContent.Add(styledBorder, c, r);
                     i++;
