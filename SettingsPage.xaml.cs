@@ -34,4 +34,12 @@ public partial class SettingsPage : ContentPage
     {
         await Navigation.PushAsync(new FavouritesPage());
     }
+    private async void OnChangeName(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new NamePage());
+    }
+    private async void Back_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
+    }
 }

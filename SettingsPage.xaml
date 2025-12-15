@@ -20,22 +20,14 @@
             <Button Text="Black" Clicked="OnColourSelected" BackgroundColor="Black"/>
         </HorizontalStackLayout>
 
-        <Label Text=" Select Background Colour Movie Grid" 
-                   FontSize="40" 
-                   FontAttributes="Bold"/>
-
-        <HorizontalStackLayout>
-            <Button Text="Default" Clicked="OnGridSelected" BackgroundColor="Red" />
-            <Button Text="Red" Clicked="OnGridSelected"  BackgroundColor="Red"/>
-            <Button Text="Blue" Clicked="OnGridSelected" BackgroundColor="Blue" />
-            <Button Text="Green" Clicked="OnGridSelected" BackgroundColor="Green" />
-            <Button Text="Black" Clicked="OnGridSelected" BackgroundColor="Black"/>
-        </HorizontalStackLayout>
-
 
         <Button Text="Go to Favourites"
                 BackgroundColor="Red" 
                 TextColor="Black"
                 Clicked="OnFavouritesClicked"/>
+        
+        <Button Text="Change Name" Clicked="OnChangeName"/>
+        
+        <Button Text="Back" Clicked="Back_Clicked"/>
     </VerticalStackLayout>
 </ContentPage>

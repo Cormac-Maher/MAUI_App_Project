@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 namespace MovieExplorer;
 
 public partial class MovieContentPage : ContentPage
@@ -7,15 +9,30 @@ public partial class MovieContentPage : ContentPage
         InitializeComponent();
         BindingContext = movie;
 
-        var favourites = Preferences.Get("Favourites", string.Empty).Split('|', StringSplitOptions.RemoveEmptyEntries).ToList();
+        string path = Path.Combine(FileSystem.AppDataDirectory, "favourites.json");
+        List<string> favourites = new();
 
-        if (favourites.Contains(movie.title))
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            favourites = JsonSerializer.Deserialize<List<string>>(json) ?? new();
+        }
+
+        var entry = favourites.FirstOrDefault(f => f.StartsWith(movie.title + "|"));
+        if (entry != null)
         {
             FavouriteButton.Text = "Remove from Favourites";
+            string[] parts = entry.Split('|');
+            if (parts.Length == 2)
+            {
+                FavouriteTimestamp.Text = $"Favourited on {parts[1]}";
+            }
         }
+
         else
         {
-            { FavouriteButton.Text = "Mark as Favourite"; }
+            FavouriteButton.Text = "Mark as Favourite";
+            FavouriteTimestamp.Text = "";
         }
     }
     private async void Back_Clicked(object sender, EventArgs e)
@@ -24,26 +41,38 @@ public partial class MovieContentPage : ContentPage
     }
 
 
-    private void Favourite_Clicked(object sender, EventArgs e)           // Method to add or remove movie from favourites
+    private async void Favourite_Clicked(object sender, EventArgs e)           // Method to add or remove movie from favourites
     {
         if (BindingContext is Movies movie)
         {
-            var favourites = Preferences.Get("Favourites", string.Empty).Split('|', StringSplitOptions.RemoveEmptyEntries).ToList();   // Puts favourites into a list
+            string path = Path.Combine(FileSystem.AppDataDirectory, "favourites.json");
+            List<string> favourites = new();
 
-            if (favourites.Contains(movie.title))
+            if (File.Exists(path))
             {
-                favourites.Remove(movie.title);
-                Preferences.Set("Favourites", string.Join(" | ", favourites));
+                string json = await File.ReadAllTextAsync(path);
+                favourites = JsonSerializer.Deserialize<List<string>>(json) ?? new();
+            }
+
+            var existing = favourites.FirstOrDefault(f => f.StartsWith(movie.title + "|"));
+            if (existing != null)
+            {
+                favourites.Remove(existing);
                 FavouriteButton.Text = "Mark as Favourite";
-                DisplayAlert("Removed", $"{movie.title} removed from favourites.", "OK");
+                FavouriteTimestamp.Text = "";
+                await DisplayAlert("Removed", $"{movie.title} removed from favourites.", "OK");
             }
             else
             {
-                favourites.Add(movie.title);
-                Preferences.Set("Favourites", string.Join(" | ", favourites));
+                string entry = $"{movie.title}|{DateTime.Now}";
+                favourites.Add(entry);
                 FavouriteButton.Text = "Remove from Favourites";
-                DisplayAlert("Added", $"{movie.title} added to favourites!", "OK");
+                FavouriteTimestamp.Text = $"Favourited on {DateTime.Now}";
+                await DisplayAlert("Added", $"{movie.title} added to favourites!", "OK");
             }
+
+            string updatedJson = JsonSerializer.Serialize(favourites);
+            await File.WriteAllTextAsync(path, updatedJson);
         }
     }
 }

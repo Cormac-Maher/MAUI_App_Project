@@ -17,13 +17,16 @@ public partial class FavouritesPage : ContentPage
     {
         _allMovies = await _movieService.LoadMoviesAsync();
 
-        var favourites = Preferences.Get("Favourites", string.Empty)
-            .Split('|', StringSplitOptions.RemoveEmptyEntries)
-            .ToList();
+        string path = Path.Combine(FileSystem.AppDataDirectory, "favourites.json");
+        List<string> favourites = new();
 
-        var favouriteMovies = _allMovies
-            .Where(m => favourites.Contains(m.title))
-            .ToList();
+        if (File.Exists(path))
+        {
+            string json = await File.ReadAllTextAsync(path);
+            favourites = JsonSerializer.Deserialize<List<string>>(json) ?? new();
+        }
+
+        var favouriteMovies = _allMovies.Where(m => favourites.Any(f => f.StartsWith(m.title + "|"))).ToList();
 
         CreateTheGrid(favouriteMovies);
     }
@@ -33,7 +36,7 @@ public partial class FavouritesPage : ContentPage
         GridPageContent.ColumnDefinitions.Clear();
         GridPageContent.Children.Clear();
 
-        int columns = 3;
+        int columns = 2;
         int rows = (int)Math.Ceiling((double)movies.Count / columns);
 
         for (int r = 0; r < rows; r++)
@@ -77,7 +80,6 @@ public partial class FavouritesPage : ContentPage
                     {
                         BackgroundColor = Colors.Red,
                         Stroke = Colors.Black,
-                        StrokeThickness = 3,
                         Padding = 10,
                         Content = info
                     };
@@ -121,5 +123,10 @@ public partial class FavouritesPage : ContentPage
 
             CreateTheGrid(filteredMovies);
         }
+    }
+
+    private async void Back_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
     }
 }

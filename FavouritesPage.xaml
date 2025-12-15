@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieExplorer.FavouritesPage"
-             Title="FavouritesPage"
+             Title=""
+             NavigationPage.HasNavigationBar="False"
              BackgroundColor="{DynamicResource AppBackgroundColor}">
     
     <ScrollView>
@@ -22,14 +23,15 @@
              TextColor="White"
              HorizontalOptions="Center" />
 
-            <Grid x:Name="GridPageContent" BackgroundColor="DarkSlateGray" 
+            <Grid x:Name="GridPageContent"
                RowSpacing="10"
                ColumnSpacing="10"
                HorizontalOptions="Center"
                VerticalOptions="Center">
 
             </Grid>
-
+            
+            <Button Text="Back" Clicked="Back_Clicked"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
