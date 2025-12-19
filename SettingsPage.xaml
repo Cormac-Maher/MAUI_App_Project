@@ -20,8 +20,18 @@
             <Button Text="Black" Clicked="OnColourSelected" BackgroundColor="Black" Padding="15" BorderColor="Black"/>
             <Button Text="Purple" Clicked="OnColourSelected" BackgroundColor="Purple" Padding="15" BorderColor="Black"/>
         </HorizontalStackLayout>
-
+        
+        <Label Text="Favourite Options" 
+               HorizontalOptions="Center"    
+               FontSize="40" 
+                   FontAttributes="Bold"/>
         <Button Text="Go to Favourites" BackgroundColor="Red" TextColor="Black" Clicked="OnFavouritesClicked" BorderColor="Black"/>
+        <Button Text="Clear All Favourites"  BackgroundColor="Red" TextColor="Black" Clicked="OnClearFavouritesClicked" BorderColor="Black"/>
+
+        <Label Text="App Settings" 
+                   HorizontalOptions="Center"
+                   FontSize="40" 
+                   FontAttributes="Bold"/>
         <Button Text="Change Name" Clicked="OnChangeName" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
         <Button Text="Back" Clicked="Back_Clicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
         

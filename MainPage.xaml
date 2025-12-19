@@ -31,6 +31,8 @@
                 <Button x:Name="SortRating" Text="Rating" Clicked="SortByClicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
             </HorizontalStackLayout>
 
+            <Button x:Name="OnAddMovie" Text="Rating" Clicked="OnAddMovieClicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
+            
             <Label 
                 x:Name="GreetingLabel"
                 Text=""

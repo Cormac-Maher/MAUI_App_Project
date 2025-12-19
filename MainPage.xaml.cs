@@ -14,7 +14,7 @@ namespace MovieExplorer
     public partial class MainPage : ContentPage
     {
         private readonly GetMovies _movieService = new GetMovies();
-        private List<Movies> _allMovies = new();   // Made a list with all the movies
+        private List<Movies> _allMovies = new();                                 // Made a list with all the movies
         string userName;
         public MainPage()
         {
@@ -32,6 +32,10 @@ namespace MovieExplorer
             LoadJsonAsync();
         }
 
+        private async void OnAddMovieClicked(object sender, EventArgs e)
+        {
+
+        }
         private async void OnSettingsClicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync(nameof(SettingsPage));

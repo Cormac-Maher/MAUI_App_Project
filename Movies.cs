@@ -14,5 +14,7 @@ namespace MovieExplorer
         public string director { get; set; }
         public double rating { get; set; }
         public string emoji { get; set; }
+
+        public string image { get; set; }
     }
 }

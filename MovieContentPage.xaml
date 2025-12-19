@@ -14,6 +14,11 @@
             <Label Text="{Binding emoji}" FontSize="20"/>
         <Label Text="{Binding GenresDisplay}" FontSize="20"/>
 
+        <Image x:Name="MovieImage"
+                Aspect="AspectFit" 
+           HeightRequest="300"
+           WidthRequest="200" />
+        
         <Label x:Name="FavouriteTimestamp" FontSize="20"/>
 
         <Button x:Name="FavouriteButton" Text="Mark as Favourite" Clicked="Favourite_Clicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>

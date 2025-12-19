@@ -34,7 +34,11 @@ public partial class MovieContentPage : ContentPage
             FavouriteButton.Text = "Mark as Favourite";
             FavouriteTimestamp.Text = "";
         }
+   
+
     }
+
+
     private async void Back_Clicked(object sender, EventArgs e)
     {
         await Navigation.PopAsync();
