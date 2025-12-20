@@ -9,6 +9,7 @@ public partial class SettingsPage : ContentPage
         InitializeComponent();
     }
 
+
     private async void OnColourSelected(object sender, EventArgs e)
     {
         if (sender is Button button)

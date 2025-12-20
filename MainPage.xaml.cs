@@ -13,8 +13,8 @@ namespace MovieExplorer
 {
     public partial class MainPage : ContentPage
     {
-        private readonly GetMovies _movieService = new GetMovies();
-        private List<Movies> _allMovies = new();                                 // Made a list with all the movies
+        public readonly GetMovies _movieService = new GetMovies();
+        public List<Movies> _allMovies = new();                                 // Made a list with all the movies
         string userName;
         public MainPage()
         {
@@ -34,7 +34,21 @@ namespace MovieExplorer
 
         private async void OnAddMovieClicked(object sender, EventArgs e)
         {
+            var addPage = new AddMoviePage();
+            await Navigation.PushModalAsync(addPage);
 
+            addPage.Disappearing += async (s, args) =>
+            {
+                if (addPage.NewMovie != null)
+                {
+                    _allMovies.Add(addPage.NewMovie);
+                    CreateTheGrid(_allMovies); 
+                    
+                    string path = Path.Combine(FileSystem.AppDataDirectory, "moviesemoji.json");
+                    string updatedJson = JsonSerializer.Serialize(_allMovies);
+                    await File.WriteAllTextAsync(path, updatedJson);
+                }
+            };
         }
         private async void OnSettingsClicked(object sender, EventArgs e)
         {
@@ -42,10 +56,7 @@ namespace MovieExplorer
 
         }
 
-
-
-
-        private void CreateTheGrid(List<Movies> movies)
+        public void CreateTheGrid(List<Movies> movies)
         {
             GridPageContent.RowDefinitions.Clear();
             GridPageContent.ColumnDefinitions.Clear();
@@ -90,6 +101,17 @@ namespace MovieExplorer
                         info.Children.Add(CreateLabel("director", 18));
                         info.Children.Add(CreateLabel("rating", 18));
                         info.Children.Add(CreateLabel("emoji", 18));
+             
+                        var deleteButton = new Button
+                        {
+                            Text = "Delete",
+                            BackgroundColor = Colors.Red,
+                            TextColor = Colors.Black,
+                            BorderColor = Colors.Black,
+                            HorizontalOptions = LayoutOptions.Center
+                        };
+                        deleteButton.Clicked += (s, e) => DeleteMovie(movie);
+                        info.Children.Add(deleteButton);
 
                         Border styledBorder = new Border
                         {
@@ -123,7 +145,18 @@ namespace MovieExplorer
             return label;
         }
 
+        private async void DeleteMovie(Movies movie)
+        {
+            bool confirm = await DisplayAlert("Confirm Delete",
+                $"Are you sure you want to delete {movie.title}?",
+                "Yes", "No");
 
+            if (confirm)
+            {
+                _allMovies.Remove(movie);
+                CreateTheGrid(_allMovies);
+            }
+        }
 
 
         private HttpClient _httpClient = new HttpClient();

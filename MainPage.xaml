@@ -31,14 +31,14 @@
                 <Button x:Name="SortRating" Text="Rating" Clicked="SortByClicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
             </HorizontalStackLayout>
 
-            <Button x:Name="OnAddMovie" Text="Rating" Clicked="OnAddMovieClicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
-            
             <Label 
                 x:Name="GreetingLabel"
                 Text=""
                 FontSize="40"
                 TextColor="White"
                 HorizontalOptions="Center" />
+            
+            <Button x:Name="OnAddMovie" Text="Add" Clicked="OnAddMovieClicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
 
             <Grid x:Name="GridPageContent" 
                   RowSpacing="10"

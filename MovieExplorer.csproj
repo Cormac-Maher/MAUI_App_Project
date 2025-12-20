@@ -65,6 +65,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="AddMoviePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="FavouritesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
