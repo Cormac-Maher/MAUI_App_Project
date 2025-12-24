@@ -101,19 +101,20 @@ namespace MovieExplorer
                         info.Children.Add(CreateLabel("director", 18));
                         info.Children.Add(CreateLabel("rating", 18));
                         info.Children.Add(CreateLabel("emoji", 18));
-             
-                        var deleteButton = new Button
-                        {
-                            Text = "Delete",
-                            BackgroundColor = Colors.Red,
-                            TextColor = Colors.Black,
-                            BorderColor = Colors.Black,
-                            HorizontalOptions = LayoutOptions.Center
-                        };
-                        deleteButton.Clicked += (s, e) => DeleteMovie(movie);
-                        info.Children.Add(deleteButton);
 
-                        Border styledBorder = new Border
+                        var binButton = new ImageButton
+                        {
+                            Source = "realbin.png", 
+                            BackgroundColor = Colors.Red, 
+                            HorizontalOptions = LayoutOptions.End, 
+                            WidthRequest = 30, 
+                            HeightRequest = 30 
+                        }; 
+                        
+                        binButton.Clicked += (s, e) => DeleteMovie(movie); 
+                        info.Children.Add(binButton);
+
+                            Border styledBorder = new Border
                         {
                             BackgroundColor = Colors.Red,
                             Stroke = Colors.Black,
@@ -153,11 +154,28 @@ namespace MovieExplorer
 
             if (confirm)
             {
-                _allMovies.Remove(movie);
+                _allMovies.Remove(movie);                  // deletes movie from the list and reloads the grid
                 CreateTheGrid(_allMovies);
+
+                string path = Path.Combine(FileSystem.AppDataDirectory, "moviesemoji.json");        // removes move from the json file
+                string updatedJson = JsonSerializer.Serialize(_allMovies);
+                await File.WriteAllTextAsync(path, updatedJson);
+
+                string favPath = Path.Combine(FileSystem.AppDataDirectory, "favourites.json"); if (File.Exists(favPath))  // checks if the movie is favourited, if so it is removed from favouries too
+                {
+                    string favJson = await File.ReadAllTextAsync(favPath);
+                    List<string> favourites = JsonSerializer.Deserialize<List<string>>(favJson) ?? new();
+                   
+                    var entry = favourites.FirstOrDefault(f => f.StartsWith(movie.title + "|"));
+                    if (entry != null)
+                    {
+                        favourites.Remove(entry);
+                        string updatedFavJson = JsonSerializer.Serialize(favourites);
+                        await File.WriteAllTextAsync(favPath, updatedFavJson);
+                    }
+                }
             }
         }
-
 
         private HttpClient _httpClient = new HttpClient();
 

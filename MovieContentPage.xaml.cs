@@ -46,27 +46,6 @@ public partial class MovieContentPage : ContentPage
         await Navigation.PopAsync();
     }
 
-    private async void OnDeleteClicked(object sender, EventArgs e)
-    {
-        bool confirm = await DisplayAlert("Confirm Delete",
-            $"Are you sure you want to delete {_movie.title}?",
-            "Yes", "No");
-
-        if (confirm)
-        {
-            if (Navigation.NavigationStack.FirstOrDefault() is MainPage mainPage)
-            {
-                mainPage._allMovies.Remove(_movie);
-                mainPage.CreateTheGrid(mainPage._allMovies);
-                string path = Path.Combine(FileSystem.AppDataDirectory, "moviesemoji.json");
-                string updatedJson = JsonSerializer.Serialize(mainPage._allMovies);
-                await File.WriteAllTextAsync(path, updatedJson);
-
-            }
-            
-        }
-        await Navigation.PopAsync();
-    } 
     private async void Favourite_Clicked(object sender, EventArgs e)           // Method to add or remove movie from favourites
     {
         if (BindingContext is Movies movie)

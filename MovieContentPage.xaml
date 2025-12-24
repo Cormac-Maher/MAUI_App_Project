@@ -16,8 +16,6 @@
         
         <Label x:Name="FavouriteTimestamp" FontSize="20"/>
         
-        <Button x:Name="Delete" Text="Delete Movie From Feed" Clicked="OnDeleteClicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
-
         <Button x:Name="FavouriteButton" Text="Mark as Favourite" Clicked="Favourite_Clicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
         <Button Text="Back" Clicked="Back_Clicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
         
