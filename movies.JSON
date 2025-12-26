@@ -1,6 +1,6 @@
 [
   {"title": "The Shawshank Redemption", "year": 1994, "genre": ["Drama"], "director": "Frank Darabont", "rating": 9.3, "emoji": "🎭", "image": "https://upload.wikimedia.org/wikipedia/en/8/81/ShawshankRedemptionMoviePoster.jpg"},
-  {"title": "The Godfather", "year": 1972, "genre": ["Crime", "Drama"], "director": "Francis Ford Coppola", "rating": 9.2, "emoji": "🕴️", "image": "https://en.wikipedia.org/wiki/File:The_Godfather.jpg"},
+  {"title": "The Godfather", "year": 1972, "genre": ["Crime", "Drama"], "director": "Francis Ford Coppola", "rating": 9.2, "emoji": "🕴️", "image": "https://image.tmdb.org/t/p/original/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg"},
   {"title": "The Dark Knight", "year": 2008, "genre": ["Action", "Crime", "Drama"], "director": "Christopher Nolan", "rating": 9.0, "emoji": "🦇", "image": "https://commons.wikimedia.org/wiki/File:The_Dark_Knight_movie_poster_-_censored_copyright.jpg"},
   {"title": "Pulp Fiction", "year": 1994, "genre": ["Crime", "Drama"], "director": "Quentin Tarantino", "rating": 8.9, "emoji": "💼", "image": "https://en.wikipedia.org/wiki/File:Pulp_Fiction_Theatrical_Poster.jpg"},
   {"title": "Schindler's List", "year": 1993, "genre": ["Biography", "Drama", "History"], "director": "Steven Spielberg", "rating": 8.9, "emoji": "📜", "image": "https://en.wikipedia.org/wiki/File:Schindler%27s_List_movie_poster.jpg"},
