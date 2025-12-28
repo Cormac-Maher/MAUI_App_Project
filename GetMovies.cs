@@ -11,7 +11,7 @@ namespace MovieExplorer
     public class GetMovies
     {
         private readonly string fileName = "moviesemoji.json";
-        private readonly string fileUrl = "https://raw.githubusercontent.com/DonH-ITS/jsonfiles/main/moviesemoji.json";
+        private readonly string fileUrl = "https://github.com/Cormac-Maher/MAUI_App_Project/blob/master/movies.JSON";
 
         public async Task<List<Movies>> LoadMoviesAsync()
         {

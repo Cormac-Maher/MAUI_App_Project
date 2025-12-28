@@ -5,19 +5,24 @@
              Title=""
              BackgroundColor="{DynamicResource AppBackgroundColor}"
              NavigationPage.HasNavigationBar="False">
-    <VerticalStackLayout Padding="20">
-        
-        <Label Text="{Binding title}" FontSize="50"/>
+    <ScrollView>
+
+        <VerticalStackLayout Padding="20">
+
+            <Label Text="{Binding title}" FontSize="50"/>
             <Label Text="{Binding year}" FontSize="20"/>
             <Label Text="{Binding director}" FontSize="20"/>
             <Label Text="{Binding rating}" FontSize="20"/>
             <Label Text="{Binding emoji}" FontSize="20"/>
-        <Label Text="{Binding GenresDisplay}" FontSize="20"/>
-        
-        <Label x:Name="FavouriteTimestamp" FontSize="20"/>
-        
-        <Button x:Name="FavouriteButton" Text="Mark as Favourite" Clicked="Favourite_Clicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
-        <Button Text="Back" Clicked="Back_Clicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
-        
-    </VerticalStackLayout>
+            <Label Text="{Binding genresDisplay}" FontSize="20"/>
+            <Label x:Name="FavouriteTimestamp" FontSize="20"/>
+
+            <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+                <ImageButton x:Name="FavouriteButton2" HorizontalOptions="Center" BorderColor="Transparent" Clicked="Favourite_Clicked" WidthRequest="200" HeightRequest="200" Source="fullheart.png" />
+                <ImageButton Source="back.png" Clicked="Back_Clicked" BackgroundColor="Red" BorderColor="Black" WidthRequest="200" HeightRequest="200"/>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+        </ScrollView>
+
 </ContentPage>   

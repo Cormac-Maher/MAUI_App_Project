@@ -177,13 +177,6 @@ namespace MovieExplorer
             }
         }
 
-        private HttpClient _httpClient = new HttpClient();
-
-        string fileName = "moviesemoji.json";
-        string fileUrl = "https://raw.githubusercontent.com/DonH-ITS/jsonfiles/refs/heads/main/moviesemoji.json";
-
-        //        private readonly MovieService _movieService = new MovieService();
-
 
         private async void LoadJsonAsync()
         {
@@ -273,8 +266,8 @@ namespace MovieExplorer
 
         private async void OnGenreSelected(object sender, EventArgs e)
         {
-            var picker = (Picker)sender;
-            var selectedGenre = picker.SelectedItem as string;
+            var genrePicker = (Picker)sender;
+            var selectedGenre = genrePicker.SelectedItem as string;
 
             if (string.IsNullOrEmpty(selectedGenre))
             {

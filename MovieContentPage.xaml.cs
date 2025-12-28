@@ -13,7 +13,6 @@ public partial class MovieContentPage : ContentPage
         _movie = movie;
         BindingContext = _movie;
 
-
         string path = Path.Combine(FileSystem.AppDataDirectory, "favourites.json");
         List<string> favourites = new();
 
@@ -26,17 +25,17 @@ public partial class MovieContentPage : ContentPage
         var entry = favourites.FirstOrDefault(f => f.StartsWith(movie.title + "|"));
         if (entry != null)
         {
-            FavouriteButton.Text = "Remove from Favourites";
             string[] parts = entry.Split('|');
             if (parts.Length == 2)
             {
+                FavouriteButton2.Source = "fullheart.png";
                 FavouriteTimestamp.Text = $"Favourited on {parts[1]}";
             }
         }
 
         else
         {
-            FavouriteButton.Text = "Mark as Favourite";
+            FavouriteButton2.Source = "emptyheart.png";
             FavouriteTimestamp.Text = "";
         }
     }
@@ -63,7 +62,7 @@ public partial class MovieContentPage : ContentPage
             if (existing != null)
             {
                 favourites.Remove(existing);
-                FavouriteButton.Text = "Mark as Favourite";
+                FavouriteButton2.Source = "emptyheart.png";
                 FavouriteTimestamp.Text = "";
                 await DisplayAlert("Removed", $"{movie.title} removed from favourites.", "OK");
             }
@@ -71,7 +70,7 @@ public partial class MovieContentPage : ContentPage
             {
                 string entry = $"{movie.title}|{DateTime.Now}";
                 favourites.Add(entry);
-                FavouriteButton.Text = "Remove from Favourites";
+                FavouriteButton2.Source = "fullheart.png";
                 FavouriteTimestamp.Text = $"Favourited on {DateTime.Now}";
                 await DisplayAlert("Added", $"{movie.title} added to favourites!", "OK");
             }

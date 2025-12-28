@@ -17,18 +17,20 @@
         TextColor="White"
         PlaceholderColor="LightGray" />
 
-            <Label 
-             Text="Welcome to your favourites page"
-             FontSize="40"
-             TextColor="White"
-             HorizontalOptions="Center" />
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <ImageButton Source="back.png" Clicked="Back_Clicked" BackgroundColor="Red" BorderColor="Black" WidthRequest="32" HeightRequest="32"/>
+                
+                <Label 
+                 Text="Welcome to your favourites page"
+                 FontSize="40"
+                 TextColor="White"/>
+            </HorizontalStackLayout>
 
             <Grid x:Name="GridPageContent"
                RowSpacing="10"
                ColumnSpacing="10"
                HorizontalOptions="Center"
                VerticalOptions="Center">
-
             </Grid>
 
             <Button Text="Back" Clicked="Back_Clicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>

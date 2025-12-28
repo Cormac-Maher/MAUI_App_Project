@@ -15,6 +15,7 @@ namespace MovieExplorer
         public double rating { get; set; }
         public string emoji { get; set; }
 
+        public string genresDisplay => genre == null ? "" : string.Join(", ", genre);
         public string image { get; set; }
     }
 }
