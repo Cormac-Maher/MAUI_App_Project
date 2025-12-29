@@ -72,6 +72,10 @@ public partial class MovieContentPage : ContentPage
                 favourites.Add(entry);
                 FavouriteButton2.Source = "fullheart.png";
                 FavouriteTimestamp.Text = $"Favourited on {DateTime.Now}";
+                await FavouriteButton2.ScaleTo(0.8, 80); 
+                await FavouriteButton2.ScaleTo(1.2, 80); 
+                await FavouriteButton2.ScaleTo(1.0, 80);
+                await Task.Delay(400);
                 await DisplayAlert("Added", $"{movie.title} added to favourites!", "OK");
             }
 
