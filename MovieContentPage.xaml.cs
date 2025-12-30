@@ -12,6 +12,7 @@ public partial class MovieContentPage : ContentPage
         InitializeComponent();
         _movie = movie;
         BindingContext = _movie;
+        SaveToHistory(movie);
 
         string path = Path.Combine(FileSystem.AppDataDirectory, "favourites.json");                     // i made json file for favourites in local data directory.
         List<string> favourites = new();                                                    // List to hold favourite movies
@@ -81,4 +82,27 @@ public partial class MovieContentPage : ContentPage
             await File.WriteAllTextAsync(path, updatedJson);                        // the updated json goes back to the file
         }
     }
-}
+
+    private void SaveToHistory(Movies movie)
+    {
+        string path = Path.Combine(FileSystem.AppDataDirectory, "history.json"); 
+        List<string> history = new(); 
+        if (File.Exists(path)) 
+        { 
+            string json = File.ReadAllText(path); 
+            history = JsonSerializer.Deserialize<List<string>>(json) ?? new(); 
+        } 
+        var existing = history.FirstOrDefault(h => h.StartsWith(movie.title + "|")); 
+        if (existing != null) 
+        { 
+            history.Remove(existing);
+        }
+        string entry = $"{movie.title}|{DateTime.Now}"; 
+        history.Insert(0, entry); 
+
+        string updatedJson = JsonSerializer.Serialize(history);
+        File.WriteAllText(path, updatedJson); 
+    }
+
+
+    }

@@ -18,8 +18,8 @@
                 FontSize="40"
                 TextColor="White"
                 HorizontalOptions="Center" />
-            
-            <Button Text="Emoji Quiz Mode" Clicked="OpenQuiz_Clicked" />
+
+            <Button Text="Emoji Quiz Mode" Clicked="OpenQuiz_Clicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black" WidthRequest="950" HorizontalOptions="Center"/>
             
             <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
                 <ImageButton Source="settingsicon.png" WidthRequest="40" HeightRequest="40" BackgroundColor="Transparent" Clicked="OnSettingsClicked"  HorizontalOptions="Start"/>

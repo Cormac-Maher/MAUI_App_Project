@@ -31,9 +31,16 @@
         <Label Text="App Settings" 
                    HorizontalOptions="Center"
                    FontSize="40" 
-                   FontAttributes="Bold"/>
+                   FontAttributes="Bold"/>        
+        
+        <Button Text="View History"
+        BackgroundColor="Red"
+        TextColor="Black"
+        Clicked="OnHistoryClicked"
+        BorderColor="Black"/>
+        
         <Button Text="Change Name" Clicked="OnChangeName" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
         <Button Text="Back" Clicked="Back_Clicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
-        
+
     </VerticalStackLayout>
 </ContentPage>

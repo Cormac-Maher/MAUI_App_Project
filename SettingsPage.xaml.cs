@@ -43,6 +43,10 @@ public partial class SettingsPage : ContentPage
         await DisplayAlert("", "All favourites have been removed.", "OK");
     }
 
+    private async void OnHistoryClicked(object sender, EventArgs e) 
+    { 
+        await Navigation.PushAsync(new HistoryPage()); 
+    }
 
     private async void Back_Clicked(object sender, EventArgs e)
     {
