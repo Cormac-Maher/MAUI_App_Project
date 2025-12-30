@@ -18,7 +18,9 @@
                 FontSize="40"
                 TextColor="White"
                 HorizontalOptions="Center" />
-
+            
+            <Button Text="Emoji Quiz Mode" Clicked="OpenQuiz_Clicked" />
+            
             <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
                 <ImageButton Source="settingsicon.png" WidthRequest="40" HeightRequest="40" BackgroundColor="Transparent" Clicked="OnSettingsClicked"  HorizontalOptions="Start"/>
                 <SearchBar x:Name="MovieSearchBar" WidthRequest="914" Placeholder="Search movies..." TextChanged="OnSearch" TextColor="White" PlaceholderColor="LightGray"/>

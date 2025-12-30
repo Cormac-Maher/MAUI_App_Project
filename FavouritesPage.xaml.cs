@@ -18,7 +18,7 @@ public partial class FavouritesPage : ContentPage
         _allMovies = await _movieService.LoadMoviesAsync();
 
         string path = Path.Combine(FileSystem.AppDataDirectory, "favourites.json");
-        List<string> favourites = new();
+        List<string> favourites = new();                                                                      // finds favourites and loads grid with only favourite movies
 
         if (File.Exists(path))
         {
@@ -30,7 +30,7 @@ public partial class FavouritesPage : ContentPage
 
         CreateTheGrid(favouriteMovies);
     }
-    private void CreateTheGrid(List<Movies> movies)    // Same code as MainPage.xaml.cs to create the grid
+    private void CreateTheGrid(List<Movies> movies)                                                 // Same code as MainPage.xaml.cs to create the grid and search bar
     {
         GridPageContent.RowDefinitions.Clear();
         GridPageContent.ColumnDefinitions.Clear();
@@ -84,10 +84,10 @@ public partial class FavouritesPage : ContentPage
                         Content = info
                     };
 
-                    var tapGesture = new TapGestureRecognizer();     // Tap gesture recogniser so user can tap on a movie to see details
+                    var tapGesture = new TapGestureRecognizer();    
                     tapGesture.Tapped += async (s, e) =>
                     {
-                        await Navigation.PushAsync(new MovieContentPage(movie));     // When the user taps on a movie, the Movie Content page will load
+                        await Navigation.PushAsync(new MovieContentPage(movie));    
                     };
                     styledBorder.GestureRecognizers.Add(tapGesture); 
 
@@ -109,7 +109,7 @@ public partial class FavouritesPage : ContentPage
     }
 
 
-    private void OnSearch(object sender, TextChangedEventArgs e)               // Code for search bar
+    private void OnSearch(object sender, TextChangedEventArgs e)          
     {
         var keyword = e.NewTextValue?.ToLower();
 
@@ -119,7 +119,7 @@ public partial class FavouritesPage : ContentPage
         }
         else
         {
-            var filteredMovies = _allMovies.Where(m => m.title.ToLower().Contains(keyword)).ToList();       //Shows only the movies that contain the searched word
+            var filteredMovies = _allMovies.Where(m => m.title.ToLower().Contains(keyword)).ToList();      
 
             CreateTheGrid(filteredMovies);
         }

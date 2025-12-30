@@ -6,7 +6,7 @@ public partial class NamePage : ContentPage
     {
         InitializeComponent();
     }
-    private async void OnSubmitClicked(object sender, EventArgs e)
+    private async void OnSubmitClicked(object sender, EventArgs e)          // This page is for setting the users name
     {
         string userName = NameEntry.Text;
 

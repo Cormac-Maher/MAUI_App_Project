@@ -7,7 +7,7 @@
 
             InitializeComponent();
 
-            string savedColour = Preferences.Get("BackgroundColor", "DarkSlateGrey");
+            string savedColour = Preferences.Get("BackgroundColor", "DarkSlateGrey");             
             Application.Current.Resources["AppBackgroundColor"] = Color.FromArgb(savedColour);
             App.Current.Resources["AppBackgroundColor"] = Colors.DarkSlateGrey;
 

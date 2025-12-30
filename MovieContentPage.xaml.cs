@@ -13,19 +13,19 @@ public partial class MovieContentPage : ContentPage
         _movie = movie;
         BindingContext = _movie;
 
-        string path = Path.Combine(FileSystem.AppDataDirectory, "favourites.json");
-        List<string> favourites = new();
+        string path = Path.Combine(FileSystem.AppDataDirectory, "favourites.json");                     // i made json file for favourites in local data directory.
+        List<string> favourites = new();                                                    // List to hold favourite movies
 
-        if (File.Exists(path))
+        if (File.Exists(path))              // Checks is the json file exists
         {
-            string json = File.ReadAllText(path);
-            favourites = JsonSerializer.Deserialize<List<string>>(json) ?? new();
+            string json = File.ReadAllText(path);                                   // reads the json file
+            favourites = JsonSerializer.Deserialize<List<string>>(json) ?? new();       // deserializes the json content into the list
         }
 
-        var entry = favourites.FirstOrDefault(f => f.StartsWith(movie.title + "|"));
+        var entry = favourites.FirstOrDefault(f => f.StartsWith(movie.title + "|"));    // Checks if the movie is in the fav list
         if (entry != null)
         {
-            string[] parts = entry.Split('|');
+            string[] parts = entry.Split('|');                                        // if movie is favourited:
             if (parts.Length == 2)
             {
                 FavouriteButton2.Source = "fullheart.png";
@@ -33,14 +33,14 @@ public partial class MovieContentPage : ContentPage
             }
         }
 
-        else
+        else                                                            // if movie is not favourited:
         {
             FavouriteButton2.Source = "emptyheart.png";
             FavouriteTimestamp.Text = "";
         }
     }
 
-    private async void Back_Clicked(object sender, EventArgs e)
+    private async void Back_Clicked(object sender, EventArgs e)         //back button   
     {
         await Navigation.PopAsync();
     }
@@ -54,33 +54,31 @@ public partial class MovieContentPage : ContentPage
 
             if (File.Exists(path))
             {
-                string json = await File.ReadAllTextAsync(path);
-                favourites = JsonSerializer.Deserialize<List<string>>(json) ?? new();
+                string json = await File.ReadAllTextAsync(path);                      
+                favourites = JsonSerializer.Deserialize<List<string>>(json) ?? new();      // deserializes the json content
             }
 
             var existing = favourites.FirstOrDefault(f => f.StartsWith(movie.title + "|"));
             if (existing != null)
             {
                 favourites.Remove(existing);
-                FavouriteButton2.Source = "emptyheart.png";
+                FavouriteButton2.Source = "emptyheart.png";                       // If movie is already in favourites, it is removed and heart is emptied
                 FavouriteTimestamp.Text = "";
-                await DisplayAlert("Removed", $"{movie.title} removed from favourites.", "OK");
             }
             else
             {
-                string entry = $"{movie.title}|{DateTime.Now}";
+                string entry = $"{movie.title}|{DateTime.Now}";            // Adds movie to favourites with timestamp
                 favourites.Add(entry);
                 FavouriteButton2.Source = "fullheart.png";
-                FavouriteTimestamp.Text = $"Favourited on {DateTime.Now}";
-                await FavouriteButton2.ScaleTo(0.8, 80); 
+                FavouriteTimestamp.Text = $"Favourited on {DateTime.Now}";      
+                await FavouriteButton2.ScaleTo(0.8, 80);                            // Animations for the heart
                 await FavouriteButton2.ScaleTo(1.2, 80); 
                 await FavouriteButton2.ScaleTo(1.0, 80);
                 await Task.Delay(400);
-                await DisplayAlert("Added", $"{movie.title} added to favourites!", "OK");
             }
 
-            string updatedJson = JsonSerializer.Serialize(favourites);
-            await File.WriteAllTextAsync(path, updatedJson);
+            string updatedJson = JsonSerializer.Serialize(favourites);                // Serializes the updated list back to json
+            await File.WriteAllTextAsync(path, updatedJson);                        // the updated json goes back to the file
         }
     }
 }

@@ -21,20 +21,8 @@ public partial class SettingsPage : ContentPage
 
             Color colour = button.BackgroundColor;
             App.Current.Resources["AppBackgroundColor"] = colour;               // Resource AppBackgroundColor is used to set background colour
-            await DisplayAlert("", "Updated Background Colour!", "OK");
         }
     }
-
-    private void OnGridSelected(object sender, EventArgs e)
-    {
-        if (sender is Button button)
-        {
-            Color colour = button.BackgroundColor;
-            App.Current.Resources["GridBackgroundColor"] = colour;
-            DisplayAlert("", "Updated Grid Background Colour!", "OK");
-        }
-    }
-
 
     private async void OnFavouritesClicked(object sender, EventArgs e)
     {
