@@ -9,26 +9,32 @@
     <VerticalStackLayout Padding="20" Spacing="15" HorizontalOptions="Center">
 
         <Label Text=" Select Background Colour" 
+               TextColor="White"
                    FontSize="40" 
                    FontAttributes="Bold"/>
 
-        <HorizontalStackLayout Spacing="20" >
-            <Button Text="Default" Clicked="OnColourSelected" BackgroundColor="DarkSlateGray" Padding="15" BorderColor="Black"/>
-            <Button Text="Red" Clicked="OnColourSelected"  BackgroundColor="Red" Padding="15" BorderColor="Black"/>
-            <Button Text="Blue" Clicked="OnColourSelected" BackgroundColor="Blue" Padding="15" BorderColor="Black"/>
-            <Button Text="Green" Clicked="OnColourSelected" BackgroundColor="Green" Padding="15" BorderColor="Black"/>
-            <Button Text="Black" Clicked="OnColourSelected" BackgroundColor="Black" Padding="15" BorderColor="Black"/>
-            <Button Text="Purple" Clicked="OnColourSelected" BackgroundColor="Purple" Padding="15" BorderColor="Black"/>
-        </HorizontalStackLayout>
+
+        <FlexLayout Wrap="Wrap" JustifyContent="SpaceEvenly"  AlignContent="Center"  AlignItems="Center" Direction="Row">
+            <Button Text="Default" Clicked="OnColourSelected" BackgroundColor="DarkSlateGray" Padding="10" BorderColor="Black"/>
+            <Button Text="Red" Clicked="OnColourSelected"  BackgroundColor="Red" Padding="10" BorderColor="Black"/>
+            <Button Text="Blue" Clicked="OnColourSelected" BackgroundColor="Blue" Padding="10" BorderColor="Black"/>
+            <Button Text="Green" Clicked="OnColourSelected" BackgroundColor="Green" Padding="10" BorderColor="Black"/>
+            <Button Text="Black" Clicked="OnColourSelected" BackgroundColor="Black" Padding="10" BorderColor="Black"/>
+            <Button Text="Purple" Clicked="OnColourSelected" BackgroundColor="Purple" Padding="10" BorderColor="Black"/>
+        </FlexLayout>
+        
+
         
         <Label Text="Favourite Options" 
-               HorizontalOptions="Center"    
+               HorizontalOptions="Center" 
+               TextColor="White"
                FontSize="40" 
                    FontAttributes="Bold"/>
         <Button Text="Go to Favourites" BackgroundColor="Red" TextColor="Black" Clicked="OnFavouritesClicked" BorderColor="Black"/>
         <Button Text="Clear All Favourites"  BackgroundColor="Red" TextColor="Black" Clicked="OnClearFavouritesClicked" BorderColor="Black"/>
 
         <Label Text="App Settings" 
+               TextColor="White"
                    HorizontalOptions="Center"
                    FontSize="40" 
                    FontAttributes="Bold"/>        
@@ -42,5 +48,7 @@
         <Button Text="Change Name" Clicked="OnChangeName" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
         <Button Text="Back" Clicked="Back_Clicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
 
+
+        
     </VerticalStackLayout>
 </ContentPage>
