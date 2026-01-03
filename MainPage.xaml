@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieExplorer.MainPage"
@@ -19,21 +19,29 @@
                 TextColor="White"
                 HorizontalOptions="Center" />
 
-            <Button Text="Emoji Quiz Mode" Clicked="OpenQuiz_Clicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black" WidthRequest="950" HorizontalOptions="Center"/>
-            
-            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
-                <ImageButton Source="settingsicon.png" WidthRequest="40" HeightRequest="40" BackgroundColor="Transparent" Clicked="OnSettingsClicked"  HorizontalOptions="Start"/>
-                <SearchBar x:Name="MovieSearchBar" WidthRequest="914" Placeholder="Search movies..." TextChanged="OnSearch" TextColor="White" PlaceholderColor="LightGray"/>
-            </HorizontalStackLayout>
+            <Button Text="Emoji Quiz Mode" Clicked="OpenQuiz_Clicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black" HorizontalOptions="Fill"/>
 
-            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
-                <Picker x:Name="GenrePicker" Title="Select Genre" SelectedIndexChanged="OnGenreSelected" WidthRequest="200"/>
+            <Grid ColumnDefinitions="Auto, *" ColumnSpacing="10">
+                <ImageButton Grid.Column="0" Source="settingsicon.png" 
+                         WidthRequest="40" HeightRequest="40" 
+                         Clicked="OnSettingsClicked"/>
+                <SearchBar Grid.Column="1" x:Name="MovieSearchBar" 
+                       Placeholder="Search movies..." 
+                       TextChanged="OnSearch" 
+                       TextColor="White" />
+            </Grid>
+
+            <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10" HorizontalOptions="Fill">
+                <Picker Grid.Column="0" x:Name="GenrePicker" Title="Select Genre"  SelectedIndexChanged="OnGenreSelected"  HorizontalOptions="Fill"/>
+                <ImageButton Grid.Column="1" x:Name="OnAddMovie" Source="addicon.png" WidthRequest="50" HeightRequest="50" CornerRadius="25" BackgroundColor="Transparent"  BorderColor="Black"  BorderWidth="1" Clicked="OnAddMovieClicked"/>
+            </Grid>
+            
+            <FlexLayout Wrap="Wrap" JustifyContent="SpaceEvenly"  AlignContent="Center"  AlignItems="Center" Direction="Row">
                 <Button x:Name="SortTitle" Text="Title" Clicked="SortByClicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
                 <Button x:Name="SortDirector" Text="Director" Clicked="SortByClicked"  BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
                 <Button x:Name="SortYear" Text="Year" Clicked="SortByClicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
                 <Button x:Name="SortRating" Text="Rating" Clicked="SortByClicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black"/>
-                <ImageButton x:Name="OnAddMovie"  BorderColor="Black" Source="addicon.png" WidthRequest="60" HeightRequest="60" CornerRadius="30" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="End" Clicked="OnAddMovieClicked"/>
-            </HorizontalStackLayout>
+            </FlexLayout>
 
             <Grid x:Name="GridPageContent" 
                   RowSpacing="10"
