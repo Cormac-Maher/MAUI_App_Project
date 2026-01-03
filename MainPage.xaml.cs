@@ -1,4 +1,4 @@
-﻿// using Android.Graphics;
+// using Android.Graphics;
 using Microsoft.Maui.Controls;
 using System;
 using System.Collections.ObjectModel;
@@ -28,35 +28,28 @@ namespace MovieExplorer
             {
                 GreetingLabel.Text = "";
             }
+        }
 
-            LoadJsonAsync();
-        }
-        private async void OpenQuiz_Clicked(object sender, EventArgs e) 
-        { 
-            var movies = await new GetMovies().LoadMoviesAsync(); 
-            await Navigation.PushAsync(new QuizPage(movies)); 
-        }
-        private async void OnAddMovieClicked(object sender, EventArgs e)     // methed to add a movie
+        protected override async void OnAppearing()      // delays loading the json to prevent crash
         {
-            var addPage = new AddMoviePage();
-            await Navigation.PushModalAsync(addPage);              // opens the Add Movie page
+            base.OnAppearing();
+            await Task.Delay(100);
+            await LoadJsonAsync();
+        }
+        private async Task LoadJsonAsync()
+        {
+            _allMovies = await _movieService.LoadMoviesAsync();             // loads movies from json file using GetMovies class
 
-            addPage.Disappearing += async (s, args) =>               // When the page is closed   
+            if (_allMovies == null || _allMovies.Count == 0)
             {
-                if (addPage.NewMovie != null)
-                {
-                    _allMovies.Add(addPage.NewMovie);
-                    CreateTheGrid(_allMovies); 
-                    
-                    string path = Path.Combine(FileSystem.AppDataDirectory, "moviesemoji.json");   // adds the new movie to the json file
-                    string updatedJson = JsonSerializer.Serialize(_allMovies);                // Serializes the updated list back to json
-                    await File.WriteAllTextAsync(path, updatedJson);              
-                }
-            };
-        }
-        private async void OnSettingsClicked(object sender, EventArgs e)    // Settings button method
-        {
-            await Shell.Current.GoToAsync(nameof(SettingsPage));
+                await DisplayAlert("Error", "No movies loaded. Check internet connection.", "OK");
+            }
+
+            CreateTheGrid(_allMovies);
+
+            var genres = _allMovies.Where(m => m.genre != null).SelectMany(m => m.genre).ToList();   // adds all genres to a list 
+            GenrePicker.ItemsSource = genres;                          // sets the genre picker items to the genres list
+            System.Diagnostics.Debug.WriteLine("MOVIES LOADED: " + _allMovies.Count);
 
         }
 
@@ -97,7 +90,7 @@ namespace MovieExplorer
 
                         var genreLabel = new Label
                         {
-                            FontSize = 18, 
+                            FontSize = 18,
                             TextColor = Colors.Black,                                            // had to do this to get genres label to work
                             Text = movie.genre == null ? "" : string.Join(", ", movie.genre)    // this joins genres with comas
                         };
@@ -108,17 +101,17 @@ namespace MovieExplorer
 
                         var binButton = new ImageButton         // delete button
                         {
-                            Source = "realbin.png", 
-                            BackgroundColor = Colors.Red, 
-                            HorizontalOptions = LayoutOptions.End, 
-                            WidthRequest = 30, 
-                            HeightRequest = 30 
-                        }; 
-                        
+                            Source = "realbin.png",
+                            BackgroundColor = Colors.Red,
+                            HorizontalOptions = LayoutOptions.End,
+                            WidthRequest = 30,
+                            HeightRequest = 30
+                        };
+
                         binButton.Clicked += (s, e) => DeleteMovie(movie);    // when the delete button is click, the movie is sent to delete method
                         info.Children.Add(binButton);
 
-                            Border styledBorder = new Border
+                        Border styledBorder = new Border
                         {
                             BackgroundColor = Colors.Red,
                             Stroke = Colors.Black,
@@ -169,7 +162,7 @@ namespace MovieExplorer
                 {
                     string favJson = await File.ReadAllTextAsync(favPath);
                     List<string> favourites = JsonSerializer.Deserialize<List<string>>(favJson) ?? new();
-                   
+
                     var entry = favourites.FirstOrDefault(f => f.StartsWith(movie.title + "|"));
                     if (entry != null)
                     {
@@ -181,16 +174,34 @@ namespace MovieExplorer
             }
         }
 
-
-        private async void LoadJsonAsync()  
+        private async void OpenQuiz_Clicked(object sender, EventArgs e)
         {
-            _allMovies = await _movieService.LoadMoviesAsync();        // loads movies from json file using GetMovies class
-            CreateTheGrid(_allMovies);
-            var genres = _allMovies.Where(m => m.genre != null).SelectMany(m => m.genre).Distinct().ToList();   // adds all genres to a list, removes duplicates 
-            GenrePicker.ItemsSource = genres;                          // sets the genre picker items to the genres list
+            var movies = await new GetMovies().LoadMoviesAsync();
+            await Navigation.PushAsync(new QuizPage(movies));
         }
+        private async void OnAddMovieClicked(object sender, EventArgs e)     // methed to add a movie
+        {
+            var addPage = new AddMoviePage();
+            await Navigation.PushModalAsync(addPage);              // opens the Add Movie page
 
+            addPage.Disappearing += async (s, args) =>               // When the page is closed   
+            {
+                if (addPage.NewMovie != null)
+                {
+                    _allMovies.Add(addPage.NewMovie);
+                    CreateTheGrid(_allMovies);
 
+                    string path = Path.Combine(FileSystem.AppDataDirectory, "moviesemoji.json");   // adds the new movie to the json file
+                    string updatedJson = JsonSerializer.Serialize(_allMovies);                // Serializes the updated list back to json
+                    await File.WriteAllTextAsync(path, updatedJson);
+                }
+            };
+        }
+        private async void OnSettingsClicked(object sender, EventArgs e)    // Settings button method
+        {
+            await Shell.Current.GoToAsync(nameof(SettingsPage));
+
+        }
         private void OnSearch(object sender, TextChangedEventArgs e)               // Code for search bar
         {
             var keyword = e.NewTextValue?.ToLower();
@@ -252,7 +263,7 @@ namespace MovieExplorer
             await Task.Delay(500);
             GreetingLabel.Text = "Sorting Movies...";
             await Task.Delay(500);
- 
+
             SortMovies(btn.Text);
             GreetingLabel.Text = $"Hello {userName}! Welcome to the Movie Explorer";
             await Task.Delay(3000);
@@ -280,7 +291,7 @@ namespace MovieExplorer
             else
             {
                 var filteredMovies = _allMovies.Where(m => m.genre != null && m.genre.Contains(selectedGenre)).ToList();     // shows only movies that contain a selected genre
-            
+
                 SortTitle.IsEnabled = false;
                 SortYear.IsEnabled = false;
                 SortRating.IsEnabled = false;
