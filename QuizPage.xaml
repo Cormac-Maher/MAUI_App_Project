@@ -8,20 +8,20 @@
    
     <ScrollView>
         <VerticalStackLayout Padding="30,0" Spacing="25">
-            <Label Text="Guess The Movie" FontSize="50" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="Guess The Movie" FontSize="50" FontAttributes="Bold" HorizontalOptions="Center" TextColor="White"/>
             <Button x:Name="StartQuizBtn" Text="Start Quiz" Clicked="StartQuizBtn_Clicked" HorizontalOptions="Fill"  BackgroundColor="Red" TextColor="Black" BorderColor="Black" WidthRequest="400"/>
             <Label x:Name="EmojiLabel" FontSize="60" HorizontalOptions="Center" />
 
-            <Grid ColumnDefinitions="*,*" WidthRequest="600">
+            <Grid ColumnDefinitions="*,*">
                 <Button x:Name="Option1Btn" Grid.Column="0" Text="Option 1" Clicked="Option_Clicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black" IsVisible="False"/>
                 <Button x:Name="Option2Btn" Grid.Column="1" Text="Option 2" Clicked="Option_Clicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black" IsVisible="False"/>
             </Grid>
-            <Grid ColumnDefinitions="*,*" WidthRequest="600">
+            <Grid ColumnDefinitions="*,*">
                 <Button x:Name="Option3Btn" Grid.Column="0" Text="Option 3" Clicked="Option_Clicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black" IsVisible="False"/>
                 <Button x:Name="Option4Btn" Grid.Column="1" Text="Option 4" Clicked="Option_Clicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black" IsVisible="False"/>
             </Grid>
 
-            <Label x:Name="FeedbackLabel" FontSize="20" HorizontalOptions="Center" />
+            <Label x:Name="AnswerLabel" FontSize="20" HorizontalOptions="Center" />
           
             <Button Text="Back" Clicked="Back_Clicked" BackgroundColor="Red" TextColor="Black" BorderColor="Black" WidthRequest="400"/>
         </VerticalStackLayout>
