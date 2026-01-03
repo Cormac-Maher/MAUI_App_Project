@@ -7,27 +7,31 @@
              NavigationPage.HasNavigationBar="False">
 
     <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
-        <Label Text="Welcome to the Movie Explorer App!" 
+        <Label Text="Welcome to the Movie Explorer App!"  
                HorizontalOptions="Center" 
                FontSize="50"
-               TextColor="White"/>
+               TextColor="White"    
+               HorizontalTextAlignment="Center"
+               LineBreakMode="WordWrap"/>
 
         <Label Text="Please enter your name:"
                HorizontalOptions="Center" 
                FontSize="40"
                TextColor="White"
+               HorizontalTextAlignment="Center"
+               LineBreakMode="WordWrap"
                />
 
         <Entry x:Name="NameEntry"
                Placeholder="Your name here"
                FontSize="18" 
-               HorizontalOptions="Center"
-               WidthRequest="500"/>
+               HorizontalOptions="Fill"
+               />
 
         <Button Text="Submit"
                 Clicked="OnSubmitClicked"
                 FontSize="18" 
                 HorizontalOptions="Center"
-                WidthRequest="500"/>
+                />
     </VerticalStackLayout>
 </ContentPage>
