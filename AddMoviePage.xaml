@@ -1,29 +1,37 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MovieExplorer.AddMoviePage"
+             x:Class="MovieExplorer.NamePage"             
+             BackgroundColor="DarkSlateGray" 
              Title=""
-             NavigationPage.HasNavigationBar="False"
-             BackgroundColor="{DynamicResource AppBackgroundColor}">
+             NavigationPage.HasNavigationBar="False">
 
+    <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
+        <Label Text="Welcome to the Movie Explorer App!"  
+               HorizontalOptions="Center" 
+               FontSize="50"
+               TextColor="White"    
+               HorizontalTextAlignment="Center"
+               LineBreakMode="WordWrap"/>
 
-    <Label Text="Add Custom Movie" 
-            HorizontalOptions="Center"
-            FontSize="50" 
-            FontAttributes="Bold"/>
-    
-    <VerticalStackLayout Padding="20" Spacing="15" HorizontalOptions="Center">
-        <Entry x:Name="TitleEntry" Placeholder="Movie Title" WidthRequest="900" />
-        <Entry x:Name="YearEntry" Placeholder="Year" Keyboard="Numeric" WidthRequest="900" />
-        <Entry x:Name="GenreEntry" Placeholder="Genre" WidthRequest="900" />
-        <Entry x:Name="DirectorEntry" Placeholder="Director" WidthRequest="900" />
-        <Entry x:Name="RatingEntry" Placeholder="Rating (0-10)" Keyboard="Numeric" WidthRequest="900" />
-        <Entry x:Name="EmojiEntry" Placeholder="Emoji" WidthRequest="900" />
+        <Label Text="Please enter your name:"
+               HorizontalOptions="Center" 
+               FontSize="40"
+               TextColor="White"
+               HorizontalTextAlignment="Center"
+               LineBreakMode="WordWrap"
+               />
 
-        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
-            <Button Text="Save" Clicked="OnSaveClicked" BackgroundColor="Red" TextColor="Black" WidthRequest="445" BorderColor="Black"/>
-            <Button Text="Cancel" Clicked="OnCancelClicked" BackgroundColor="Red" TextColor="Black" WidthRequest="445" BorderColor="Black"/>
-        </HorizontalStackLayout>
+        <Entry x:Name="NameEntry"
+               Placeholder="Your name here"
+               FontSize="18" 
+               HorizontalOptions="Fill"
+               />
+
+        <Button Text="Submit"
+                Clicked="OnSubmitClicked"
+                FontSize="18" 
+                HorizontalOptions="Center"
+                />
     </VerticalStackLayout>
-    
 </ContentPage>
