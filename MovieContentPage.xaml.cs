@@ -55,7 +55,7 @@ public partial class MovieContentPage : ContentPage
 
             if (File.Exists(path))
             {
-                string json = await File.ReadAllTextAsync(path);                      
+                string json = await File.ReadAllTextAsync(path);
                 favourites = JsonSerializer.Deserialize<List<string>>(json) ?? new();      // deserializes the json content
             }
 
@@ -71,9 +71,9 @@ public partial class MovieContentPage : ContentPage
                 string entry = $"{movie.title}|{DateTime.Now}";            // Adds movie to favourites with timestamp
                 favourites.Add(entry);
                 FavouriteButton2.Source = "fullheart.png";
-                FavouriteTimestamp.Text = $"Favourited on {DateTime.Now}";      
+                FavouriteTimestamp.Text = $"Favourited on {DateTime.Now}";
                 await FavouriteButton2.ScaleTo(0.8, 80);                            // Animations for the heart
-                await FavouriteButton2.ScaleTo(1.2, 80); 
+                await FavouriteButton2.ScaleTo(1.2, 80);
                 await FavouriteButton2.ScaleTo(1.0, 80);
                 await Task.Delay(400);
             }
@@ -85,24 +85,22 @@ public partial class MovieContentPage : ContentPage
 
     private void SaveToHistory(Movies movie)
     {
-        string path = Path.Combine(FileSystem.AppDataDirectory, "history.json"); 
-        List<string> history = new(); 
-        if (File.Exists(path)) 
-        { 
-            string json = File.ReadAllText(path); 
-            history = JsonSerializer.Deserialize<List<string>>(json) ?? new(); 
-        } 
-        var existing = history.FirstOrDefault(h => h.StartsWith(movie.title + "|")); 
-        if (existing != null) 
-        { 
+        string path = Path.Combine(FileSystem.AppDataDirectory, "history.json");           // creates history file  
+        List<string> history = new();
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            history = JsonSerializer.Deserialize<List<string>>(json) ?? new();          
+        }
+        var existing = history.FirstOrDefault(h => h.StartsWith(movie.title + "|"));           // checks if movie is already in history
+        if (existing != null)
+        {
             history.Remove(existing);
         }
-        string entry = $"{movie.title}|{DateTime.Now}"; 
-        history.Insert(0, entry); 
+        string entry = $"{movie.title}|{DateTime.Now}";                // adds movie with timestamp to history
+        history.Insert(0, entry);
 
-        string updatedJson = JsonSerializer.Serialize(history);
+        string updatedJson = JsonSerializer.Serialize(history);               // updates json 
         File.WriteAllText(path, updatedJson); 
     }
-
-
-    }
+}
