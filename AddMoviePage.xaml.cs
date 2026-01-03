@@ -14,9 +14,9 @@ public partial class AddMoviePage : ContentPage
     private async void OnSaveClicked(object sender, EventArgs e)
     {
         if (!int.TryParse(YearEntry.Text, out int year)) year = 0;
-        if (!double.TryParse(RatingEntry.Text, out double rating)) rating = 0;
+        if (!double.TryParse(RatingEntry.Text, out double rating)) rating = 0;              // year and rating set to numbers 
         List<string> genreList;
-        if (string.IsNullOrWhiteSpace(GenreEntry.Text))
+        if (string.IsNullOrWhiteSpace(GenreEntry.Text))                      // Genres set as a list
         {
             genreList = new List<string>();
         }
