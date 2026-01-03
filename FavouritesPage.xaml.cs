@@ -3,13 +3,13 @@ using System.Text.Json;
 namespace MovieExplorer;
 
 public partial class FavouritesPage : ContentPage
-{ 
-	private List<Movies> _allMovies = new();
+{
+    private List<Movies> _allMovies = new();
     private readonly GetMovies _movieService = new GetMovies();
 
     public FavouritesPage()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
 
         LoadFavourites();
     }
@@ -43,7 +43,7 @@ public partial class FavouritesPage : ContentPage
             GridPageContent.AddRowDefinition(new RowDefinition());
 
         for (int c = 0; c < columns; c++)
-            GridPageContent.AddColumnDefinition(new ColumnDefinition { Width = GridLength.Star });    
+            GridPageContent.AddColumnDefinition(new ColumnDefinition { Width = GridLength.Star });
 
         int i = 0;
 
@@ -84,12 +84,12 @@ public partial class FavouritesPage : ContentPage
                         Content = info
                     };
 
-                    var tapGesture = new TapGestureRecognizer();    
+                    var tapGesture = new TapGestureRecognizer();
                     tapGesture.Tapped += async (s, e) =>
                     {
-                        await Navigation.PushAsync(new MovieContentPage(movie));    
+                        await Navigation.PushAsync(new MovieContentPage(movie));
                     };
-                    styledBorder.GestureRecognizers.Add(tapGesture); 
+                    styledBorder.GestureRecognizers.Add(tapGesture);
 
                     GridPageContent.Add(styledBorder, c, r);
                     i++;
@@ -109,7 +109,7 @@ public partial class FavouritesPage : ContentPage
     }
 
 
-    private void OnSearch(object sender, TextChangedEventArgs e)          
+    private void OnSearch(object sender, TextChangedEventArgs e)
     {
         var keyword = e.NewTextValue?.ToLower();
 
@@ -119,7 +119,7 @@ public partial class FavouritesPage : ContentPage
         }
         else
         {
-            var filteredMovies = _allMovies.Where(m => m.title.ToLower().Contains(keyword)).ToList();      
+            var filteredMovies = _allMovies.Where(m => m.title.ToLower().Contains(keyword)).ToList();
 
             CreateTheGrid(filteredMovies);
         }
