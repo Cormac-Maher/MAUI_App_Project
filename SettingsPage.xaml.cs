@@ -14,9 +14,9 @@ public partial class SettingsPage : ContentPage
     {
         if (sender is Button button)
         {
-            await button.ScaleTo(2, 150);  
+            await button.ScaleTo(2, 150);
             await button.RotateTo(720, 400);                  // Amimates button when pressed
-            await button.ScaleTo(1.0, 300);   
+            await button.ScaleTo(1.0, 300);
             button.Rotation = 0;
 
             Color colour = button.BackgroundColor;
@@ -38,14 +38,14 @@ public partial class SettingsPage : ContentPage
         string path = Path.Combine(FileSystem.AppDataDirectory, "favourites.json");             //When the user clears favourites the favourites json file is deleted
         if (File.Exists(path))
         {
-            File.Delete(path); 
+            File.Delete(path);
         }
         await DisplayAlert("", "All favourites have been removed.", "OK");
     }
 
-    private async void OnHistoryClicked(object sender, EventArgs e) 
-    { 
-        await Navigation.PushAsync(new HistoryPage()); 
+    private async void OnHistoryClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new HistoryPage());
     }
 
     private async void Back_Clicked(object sender, EventArgs e)
