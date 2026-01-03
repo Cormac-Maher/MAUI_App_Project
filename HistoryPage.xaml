@@ -8,8 +8,9 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
-            <Label Text="Recently Viewed" FontSize="50" HorizontalOptions="Center" FontAttributes="Bold"/>
+            <Label Text="Recently Viewed" FontSize="50" HorizontalOptions="Center" FontAttributes="Bold" TextColor="White"/>
             <VerticalStackLayout x:Name="HistoryList" Spacing="10"/>
+            <ImageButton Source="back.png" Clicked="Back_Clicked" BackgroundColor="Red" BorderColor="Black" WidthRequest="200" HeightRequest="200"/>
         </VerticalStackLayout>
     </ScrollView>
     
