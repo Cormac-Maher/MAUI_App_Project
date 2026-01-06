@@ -15,7 +15,7 @@
             if (string.IsNullOrEmpty(userName))
                 MainPage = new NavigationPage(new NamePage());
             else
-                MainPage = new NavigationPage(new MainPage());
+                MainPage = new AppShell();
         }
         
 
