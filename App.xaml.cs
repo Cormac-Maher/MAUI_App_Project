@@ -16,7 +16,6 @@
                 MainPage = new NavigationPage(new NamePage());
             else
                 MainPage = new NavigationPage(new MainPage());
-            MainPage = new AppShell();
         }
         
 
