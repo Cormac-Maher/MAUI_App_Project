@@ -14,7 +14,7 @@ public partial class NamePage : ContentPage
         {
             Preferences.Set("UserName", userName);
 
-            await Navigation.PushAsync(new MainPage());
+            Application.Current.MainPage = new AppShell();
         }
         else
         {
