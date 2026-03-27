@@ -64,7 +64,9 @@ Supports title, year, rating, genre, and image
 Movies can be deleted from the collection
 Updates the JSON file accordingly
 
-AI Acknowledgment:
+Code Acknowledgments:
+Used code worked on in Labs as base of code for Home, settings pages & getmovies.cs 
+AI:
 **Microsoft Copilt**
 Used to dubug code and refactor code 
 Used to generate base of code for History & Quiz pages
