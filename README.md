@@ -65,9 +65,10 @@ Movies can be deleted from the collection
 Updates the JSON file accordingly
 
 <img width="1918" height="1008" alt="image" src="https://github.com/user-attachments/assets/5b11e9ae-ebd5-4118-a315-3edc088142d8" />
-
-
-
+<img width="1918" height="602" alt="image" src="https://github.com/user-attachments/assets/fec804c5-aad1-41bb-a7dc-e04809756144" />
+<img width="1917" height="832" alt="image" src="https://github.com/user-attachments/assets/e72e0952-2c64-47b2-b347-1d7e0581c617" />
+<img width="1917" height="851" alt="image" src="https://github.com/user-attachments/assets/edfcd0be-4d2d-434f-ae00-57660bc3d362" />
+<img width="1916" height="1016" alt="image" src="https://github.com/user-attachments/assets/7bc8701f-f398-4c13-9bc5-f1edeb9b44f4" />
 
 
 
