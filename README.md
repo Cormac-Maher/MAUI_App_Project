@@ -65,8 +65,12 @@ Movies can be deleted from the collection
 Updates the JSON file accordingly
 
 AI Acknowledgment:
+**Microsoft Copilt**
+Used to dubug code and refactor code 
+Used to generate base of code for History & Quiz pages
 
-
+**ChatGPT**
+Used to generate ideas for what to add to project such as emoji quiz mode & AddCustom Movie
 
 
 <img width="1918" height="1008" alt="image" src="https://github.com/user-attachments/assets/5b11e9ae-ebd5-4118-a315-3edc088142d8" />
@@ -81,10 +85,6 @@ AI Acknowledgment:
 <img width="360" height="841" alt="image" src="https://github.com/user-attachments/assets/966f3fb5-8763-4d81-a26d-00febd4986fb" />
 <img width="361" height="845" alt="image" src="https://github.com/user-attachments/assets/edb37dbe-d082-40e4-932d-52f216812165" />
 <img width="363" height="845" alt="image" src="https://github.com/user-attachments/assets/d5a6d055-4843-4c23-96af-e61eb4f936d7" />
-
-
-
-
 
 
 
