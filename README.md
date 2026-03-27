@@ -6,18 +6,18 @@ It allows users to browse, search, sort, and manage a personalised movie collect
 This app was developed as part of a 2nd Year Cross‑Platform Application Project, focusing on UI design, data persistence, and multi‑platform compatibility.
 
 Features:
->Browse a list of movies
->Search movies by title
->Sort movies by rating, year, director, genre, or title
->Add custom movies
->Remove movies
->Favourite movies
->View history 
->Emoji based movie quiz mode
->Change background colour
->JSON data downloaded and cached locally
->Separate favourites/history per user
->Runs on Windows and Android
+Browse a list of movies
+Search movies by title
+Sort movies by rating, year, director, genre, or title
+Add custom movies
+Remove movies
+Favourite movies
+View history 
+Emoji based movie quiz mode
+Change background colour
+JSON data downloaded and cached locally
+Separate favourites/history per user
+Runs on Windows and Android
 
 Technologies used:
 Programming Languages - C# & XAML
@@ -64,6 +64,7 @@ Supports title, year, rating, genre, and image
 Movies can be deleted from the collection
 Updates the JSON file accordingly
 
+<img width="1918" height="1008" alt="image" src="https://github.com/user-attachments/assets/5b11e9ae-ebd5-4118-a315-3edc088142d8" />
 
 
 
